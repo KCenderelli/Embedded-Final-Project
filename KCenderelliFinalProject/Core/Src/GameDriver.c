@@ -6,28 +6,36 @@
  */
 #include "GameDriver.h"
 
-extern uint16_t game_mode;
+extern volatile GameState game;
 
 void TouchLogic(uint16_t x, uint16_t y){
-	if(game_mode == START_SCREEN)
+	if(game.mode == START_SCREEN)
 	{
-		game_mode = StartScreenTouchLogic(x,y);
-		if(game_mode == ONE_PLAYER)
+		game = StartScreenTouchLogic(x,y);
+		if(game.mode == ONE_PLAYER_SETUP)
 		{
-			onePlayerStartUp();
+			game = onePlayerStartUp(game, x, y);
 		}
-		if(game_mode == TWO_PLAYER)
+		else if(game.mode == TWO_PLAYER_SETUP)
 		{
-			twoPlayerStartUp();
+			game = twoPlayerStartUp(game, x, y);
 		}
 	}
-	if(game_mode == ONE_PLAYER)
+	else if (game.mode == ONE_PLAYER_SETUP)
 	{
-		onePlayerGameLogic();
+
 	}
-	if(game_mode == TWO_PLAYER)
+	else if (game.mode == TWO_PLAYER_SETUP)
 	{
-		twoPlayerGameLogic();
+
+	}
+	else if(game.mode == ONE_PLAYER)
+	{
+		game = onePlayerGameLogic(game, x, y);
+	}
+	else if(game.mode == TWO_PLAYER)
+	{
+		game = twoPlayerGameLogic(game, x, y);
 	}
 }
 

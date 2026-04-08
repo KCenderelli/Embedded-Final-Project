@@ -1,2 +1,3 @@
-../Core/Src/SharedPlayer.c:12:10:StartScreenTouchLogic	5
+../Core/Src/SharedPlayer.c:12:11:StartScreenTouchLogic	5
 ../Core/Src/SharedPlayer.c:26:6:returnToStart	1
+../Core/Src/SharedPlayer.c:31:11:placeShips	13

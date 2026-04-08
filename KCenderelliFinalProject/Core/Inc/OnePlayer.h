@@ -10,7 +10,7 @@
 
 #include "SharedPlayer.h"
 
-void onePlayerStartUp(void);
-void onePlayerGameLogic(void);
+GameState onePlayerStartUp(GameState game, uint16_t x, uint16_t y);
+GameState onePlayerGameLogic(GameState game, uint16_t x, uint16_t y);
 
 #endif /* INC_ONEPLAYER_H_ */

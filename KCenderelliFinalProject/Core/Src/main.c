@@ -22,7 +22,6 @@
 
 static void SystemClock_Config(void);
 
-
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -45,8 +44,8 @@ int main(void)
 
   ApplicationInit();
 
-  LCD_Visual_Demo();
-//  startScreenDisplay();
+//  LCD_Visual_Demo();
+  startScreenDisplay();
 
 //  HAL_Delay(5000);
 

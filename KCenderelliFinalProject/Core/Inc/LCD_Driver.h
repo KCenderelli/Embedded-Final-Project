@@ -85,7 +85,9 @@ void LCD_Draw_Square_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t height, uint16_
 
 // Draw Vertical Line
 void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color);
+void LCD_Draw_Horizontal_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color);
 void LCD_Clear(uint32_t Color);
+void clearScreen(void);
 
 void LCD_Error_Handler(void);
 

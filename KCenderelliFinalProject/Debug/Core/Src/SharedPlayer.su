@@ -1,2 +1,3 @@
-../Core/Src/SharedPlayer.c:12:10:StartScreenTouchLogic	16	static
+../Core/Src/SharedPlayer.c:12:11:StartScreenTouchLogic	16	static
 ../Core/Src/SharedPlayer.c:26:6:returnToStart	8	static
+../Core/Src/SharedPlayer.c:31:11:placeShips	16	static

@@ -1,2 +1,2 @@
-../Core/Src/TwoPlayer.c:9:6:twoPlayerStartUp	1
-../Core/Src/TwoPlayer.c:13:6:twoPlayerGameLogic	1
+../Core/Src/TwoPlayer.c:9:11:twoPlayerStartUp	1
+../Core/Src/TwoPlayer.c:17:11:twoPlayerGameLogic	1

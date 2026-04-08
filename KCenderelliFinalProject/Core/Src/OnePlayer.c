@@ -6,10 +6,16 @@
  */
 #include "OnePlayer.h"
 
-void onePlayerStartUp(void){
 
+GameState onePlayerStartUp(GameState game, uint16_t x, uint16_t y){
+	clearScreen();
+	gridDisplay();
+	rotationButtonDisplay();
+	game = placeShips(game, x, y);
+	return game;
 }
 
-void onePlayerGameLogic(void){
-
+GameState onePlayerGameLogic(GameState game, uint16_t x, uint16_t y){
+	gridDisplay();
+	return game;
 }

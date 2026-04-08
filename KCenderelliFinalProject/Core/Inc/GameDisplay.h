@@ -12,5 +12,11 @@
 
 void startScreenDisplay(void);
 void gridDisplay(void);
+void rotationButtonDisplay(void);
+void player1BoardDisplay(void);
+void player2BoardDisplay(void);
+
+void ship2HorizontalDisplay(int x, int y);
+void ship2VerticalDisplay(int x, int y);
 
 #endif /* INC_GAMEDISPLAY_H_ */

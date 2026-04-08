@@ -32,39 +32,85 @@ void startScreenDisplay(void){
 	LCD_DisplayChar(150,10,'P');
 
 
-	LCD_Draw_Circle_Fill(55,250,40,LCD_COLOR_LIGHTBLUE);
-	LCD_Draw_Circle_Fill(185,250,40,LCD_COLOR_LIGHTBLUE);
+//	LCD_Draw_Circle_Fill(55,250,40,LCD_COLOR_LIGHTBLUE);
+//	LCD_Draw_Circle_Fill(185,250,40,LCD_COLOR_LIGHTBLUE);
 
-	LCD_Draw_Square_Fill(55,250,40, 40,LCD_COLOR_BLACK);
+	LCD_Draw_Square_Fill(125,150,40,90,LCD_COLOR_LIGHTBLUE);
+	LCD_Draw_Square_Fill(125,250,40,90,LCD_COLOR_LIGHTBLUE);
+
 
 	LCD_SetTextColor(LCD_COLOR_BLACK);
 	LCD_SetFont(&Font12x12);
 
-	LCD_DisplayChar(55,250,'O');
-//	LCD_DisplayChar(25,10,'N');
-//	LCD_DisplayChar(40,10,'E');
-//
-//	LCD_DisplayChar(115,10,'P');
-//	LCD_DisplayChar(130,10,'L');
-//	LCD_DisplayChar(140,10,'A');
-//	LCD_DisplayChar(150,10,'Y');
-//	LCD_DisplayChar(140,10,'E');
-//	LCD_DisplayChar(150,10,'R');
+	LCD_DisplayChar(55,150,'O');
+	LCD_DisplayChar(65,150,'N');
+	LCD_DisplayChar(75,150,'E');
 
-	LCD_DisplayChar(185,250,'T');
-//	LCD_DisplayChar(25,10,'W');
-//	LCD_DisplayChar(40,10,'O');
-//
-//	LCD_DisplayChar(115,10,'P');
-//	LCD_DisplayChar(130,10,'L');
-//	LCD_DisplayChar(140,10,'A');
-//	LCD_DisplayChar(150,10,'Y');
-//	LCD_DisplayChar(140,10,'E');
-//	LCD_DisplayChar(150,10,'R');
+	LCD_DisplayChar(95,150,'P');
+	LCD_DisplayChar(105,150,'L');
+	LCD_DisplayChar(115,150,'A');
+	LCD_DisplayChar(125,150,'Y');
+	LCD_DisplayChar(135,150,'E');
+	LCD_DisplayChar(145,150,'R');
+
+	LCD_DisplayChar(55,250,'T');
+	LCD_DisplayChar(65,250,'W');
+	LCD_DisplayChar(75,250,'O');
+
+	LCD_DisplayChar(95,250,'P');
+	LCD_DisplayChar(105,250,'L');
+	LCD_DisplayChar(115,250,'A');
+	LCD_DisplayChar(125,250,'Y');
+	LCD_DisplayChar(135,250,'E');
+	LCD_DisplayChar(145,250,'R');
 }
 
 void gridDisplay(void){
-	LCD_Draw_Vertical_Line(10,10,250,LCD_COLOR_BLACK);
-	LCD_Draw_Vertical_Line(230,10,250,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(10,10,210,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(40,10,210,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(70,10,210,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(100,10,210,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(130,10,210,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(160,10,210,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(190,10,210,LCD_COLOR_BLACK);
+	LCD_Draw_Vertical_Line(220,10,210,LCD_COLOR_BLACK);
+
+
+	LCD_Draw_Horizontal_Line(10, 10, 210, LCD_COLOR_BLACK);
+	LCD_Draw_Horizontal_Line(10, 40, 210, LCD_COLOR_BLACK);
+	LCD_Draw_Horizontal_Line(10, 70, 210, LCD_COLOR_BLACK);
+	LCD_Draw_Horizontal_Line(10, 100, 210, LCD_COLOR_BLACK);
+	LCD_Draw_Horizontal_Line(10, 130, 210, LCD_COLOR_BLACK);
+	LCD_Draw_Horizontal_Line(10, 160, 210, LCD_COLOR_BLACK);
+	LCD_Draw_Horizontal_Line(10, 190, 210, LCD_COLOR_BLACK);
+	LCD_Draw_Horizontal_Line(10, 220, 210, LCD_COLOR_BLACK);
 }
 
+
+void rotationButtonDisplay(void){
+	LCD_Draw_Square_Fill(70,270,40,40,LCD_COLOR_LIGHTBLUE);
+	LCD_DisplayChar(35,270,'R');
+	LCD_DisplayChar(45,270,'O');
+	LCD_DisplayChar(55,270,'T');
+	LCD_DisplayChar(65,270,'A');
+	LCD_DisplayChar(75,270,'T');
+	LCD_DisplayChar(85,270,'E');
+
+	LCD_Draw_Square_Fill(180,270,40,40,LCD_COLOR_LIGHTBLUE);
+	LCD_DisplayChar(145,270,'P');
+	LCD_DisplayChar(155,270,'L');
+	LCD_DisplayChar(165,270,'A');
+	LCD_DisplayChar(175,270,'C');
+	LCD_DisplayChar(185,270,'E');
+}
+
+void ship2HorizontalDisplay(int x, int y)
+{
+	LCD_Draw_Circle_Fill(x,y,10,LCD_COLOR_LIGHTBLUE);
+	LCD_Draw_Circle_Fill(x+30,y,10,LCD_COLOR_LIGHTBLUE);
+}
+void ship2VerticalDisplay(int x, int y)
+{
+	LCD_Draw_Circle_Fill(x,y,40,LCD_COLOR_LIGHTBLUE);
+	LCD_Draw_Circle_Fill(x,y+30,40,LCD_COLOR_LIGHTBLUE);
+}
