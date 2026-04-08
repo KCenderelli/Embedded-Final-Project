@@ -28,6 +28,7 @@ The color format for the Display is chosen as RGB888. 8 bits or 255 values for R
 #define LCD_COLOR_MAGENTA       0xFF00FF
 #define LCD_COLOR_YELLOW        0xFFFF00
 #define LCD_COLOR_LIGHTBLUE     0x8080FF
+#define LCD_COLOR_LIGHTERBLUE   0x90D5FF
 #define LCD_COLOR_LIGHTGREEN    0x80FF80
 #define LCD_COLOR_LIGHTRED      0xFF8080
 #define LCD_COLOR_LIGHTCYAN     0x80FFFF
@@ -79,6 +80,8 @@ void LCD_SetFont(FONT_t *fonts);
 
 // Draw Circle Filled
 void LCD_Draw_Circle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t radius, uint32_t color);
+
+void LCD_Draw_Square_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t height, uint16_t width, uint32_t color);
 
 // Draw Vertical Line
 void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color);

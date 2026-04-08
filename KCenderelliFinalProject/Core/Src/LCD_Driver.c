@@ -259,6 +259,22 @@ void LCD_Draw_Circle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t radius, uint32_
     }
 }
 
+
+void LCD_Draw_Square_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t height, uint16_t width, uint32_t color)
+{
+    for(int16_t y=-height; y<=height; y++)
+    {
+        for(int16_t x=-width; x<=width; x++)
+        {
+            if(x*y <= height*width)
+            {
+            	LCD_Draw_Pixel(x+Xpos, y+Ypos, color);
+            }
+        }
+    }
+}
+
+
 void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color)
 {
   for (uint16_t i = 0; i < len; i++)

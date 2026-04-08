@@ -7,6 +7,7 @@
 
 #include "LCD_Driver.h"
 #include "stm32f4xx_hal.h"
+#include "GameDriver.h"
 
 #include <stdio.h>
 

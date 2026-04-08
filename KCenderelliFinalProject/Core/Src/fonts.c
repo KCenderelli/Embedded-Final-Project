@@ -492,6 +492,8 @@ FONT_t Font16x24 = {
   24, /* Height */
 };
 
+
+
 FONT_t Font12x12 = {
   ASCII12x12_Table,
   12, /* Width */

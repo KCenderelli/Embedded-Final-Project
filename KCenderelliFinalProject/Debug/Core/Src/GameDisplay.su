@@ -1,0 +1,2 @@
+../Core/Src/GameDisplay.c:11:6:startScreenDisplay	16	static
+../Core/Src/GameDisplay.c:66:6:gridDisplay	8	static

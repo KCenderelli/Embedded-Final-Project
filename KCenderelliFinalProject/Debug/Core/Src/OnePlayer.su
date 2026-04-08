@@ -1,0 +1,2 @@
+../Core/Src/OnePlayer.c:9:6:onePlayerStartUp	4	static
+../Core/Src/OnePlayer.c:13:6:onePlayerGameLogic	4	static

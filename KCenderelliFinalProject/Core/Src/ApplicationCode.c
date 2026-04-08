@@ -121,13 +121,11 @@ void EXTI15_10_IRQHandler()
 		DetermineTouchPosition(&StaticTouchData);
 		/* Touch valid */
 		printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
-		LCD_Clear(LCD_COLOR_RED);
+		TouchLogic(StaticTouchData.x, StaticTouchData.y);
 
 	}else{
-
 		/* Touch not pressed */
 		printf("\nNot pressed \n");
-		LCD_Clear(LCD_COLOR_GREEN);
 	}
 
 	// Re-enable IRQs

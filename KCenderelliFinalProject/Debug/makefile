@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (12.3.rel1)
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -60,8 +60,8 @@ all: main-build
 main-build: LCDStarterCodeSDRAM.elf secondary-outputs
 
 # Tool invocations
-LCDStarterCodeSDRAM.elf LCDStarterCodeSDRAM.map: $(OBJS) $(USER_OBJS) C:\Users\xcowa\Documents\OneDrive\Documents\Projects\CU\ECEN3753\LCDStarterCodeSDRAM\STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "LCDStarterCodeSDRAM.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\xcowa\Documents\OneDrive\Documents\Projects\CU\ECEN3753\LCDStarterCodeSDRAM\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCDStarterCodeSDRAM.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+LCDStarterCodeSDRAM.elf LCDStarterCodeSDRAM.map: $(OBJS) $(USER_OBJS) C:\Users\Kirac\OneDrive\Desktop\School\Spring\ 2026\Embedded\ Software\ Engineering\Embedded-Final-Project\KCenderelliFinalProject\STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "LCDStarterCodeSDRAM.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Kirac\OneDrive\Desktop\School\Spring 2026\Embedded Software Engineering\Embedded-Final-Project\KCenderelliFinalProject\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCDStarterCodeSDRAM.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
