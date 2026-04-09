@@ -1,2 +1,2 @@
-../Core/Src/TwoPlayer.c:9:11:twoPlayerStartUp	16	static
-../Core/Src/TwoPlayer.c:16:11:twoPlayerGameLogic	16	static
+../Core/Src/TwoPlayer.c:9:6:twoPlayerStartUp	8	static
+../Core/Src/TwoPlayer.c:15:11:twoPlayerGameLogic	16	static

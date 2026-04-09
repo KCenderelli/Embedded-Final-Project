@@ -1,2 +1,3 @@
-../Core/Src/OnePlayer.c:10:11:onePlayerStartUp	1
-../Core/Src/OnePlayer.c:18:11:onePlayerGameLogic	1
+../Core/Src/OnePlayer.c:10:6:onePlayerStartUp	1
+../Core/Src/OnePlayer.c:16:11:onePlayerPlaceShips	1
+../Core/Src/OnePlayer.c:24:11:onePlayerGameLogic	1

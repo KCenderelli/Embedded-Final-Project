@@ -10,7 +10,8 @@
 
 #include "SharedPlayer.h"
 
-GameState onePlayerStartUp(GameState game, uint16_t x, uint16_t y);
+void onePlayerStartUp(void);
 GameState onePlayerGameLogic(GameState game, uint16_t x, uint16_t y);
+GameState onePlayerPlaceShips(GameState game, uint16_t x, uint16_t y);
 
 #endif /* INC_ONEPLAYER_H_ */

@@ -14,26 +14,20 @@ void TouchLogic(uint16_t x, uint16_t y){
 		game = StartScreenTouchLogic(x,y);
 		if(game.mode == ONE_PLAYER_SETUP)
 		{
-			game = onePlayerStartUp(game, x, y);
+			onePlayerStartUp();
 		}
 		else if(game.mode == TWO_PLAYER_SETUP)
 		{
-			game = twoPlayerStartUp(game, x, y);
+			twoPlayerStartUp();
 		}
 	}
 	else if (game.mode == ONE_PLAYER_SETUP)
 	{
-		clearScreen();
-		gridDisplay();
-		rotationButtonDisplay();
-//		placeShips();
+		onePlayerPlaceShips(game, x, y);
 	}
 	else if (game.mode == TWO_PLAYER_SETUP)
 	{
-		clearScreen();
-		gridDisplay();
-		rotationButtonDisplay();
-//		placeShips();
+		onePlayerPlaceShips(game, x, y);
 	}
 	else if(game.mode == ONE_PLAYER)
 	{
