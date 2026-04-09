@@ -69,7 +69,7 @@ int main(void)
 	  }
 	  if(game.mode == ONE_PLAYER_SETUP || game.mode == TWO_PLAYER_SETUP)
 	  {
-		  renderPlacementScreen(&game);
+		  renderPlacedShips(&game);
 	  }
   }
 }

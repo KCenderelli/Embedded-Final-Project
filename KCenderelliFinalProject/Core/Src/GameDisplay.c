@@ -63,6 +63,7 @@ void startScreenDisplay(void){
 	LCD_DisplayChar(125,250,'Y');
 	LCD_DisplayChar(135,250,'E');
 	LCD_DisplayChar(145,250,'R');
+	return;
 }
 
 void gridDisplay(void){
@@ -84,6 +85,7 @@ void gridDisplay(void){
 	LCD_Draw_Horizontal_Line(10, 160, 210, LCD_COLOR_BLACK);
 	LCD_Draw_Horizontal_Line(10, 190, 210, LCD_COLOR_BLACK);
 	LCD_Draw_Horizontal_Line(10, 220, 210, LCD_COLOR_BLACK);
+	return;
 }
 
 
@@ -102,6 +104,7 @@ void rotationButtonDisplay(void){
 	LCD_DisplayChar(165,270,'A');
 	LCD_DisplayChar(175,270,'C');
 	LCD_DisplayChar(185,270,'E');
+	return;
 }
 
 void drawShipPreview(Ship ship)
@@ -121,6 +124,7 @@ void drawShipPreview(Ship ship)
 
         LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_LIGHTBLUE);
     }
+    return;
 }
 
 
@@ -134,6 +138,7 @@ void renderPlacementScreen(GameState * game)
     previewShip.orient = game->placement.currentOrientation;
 
     drawShipPreview(previewShip);
+    return;
 }
 
 void renderPlacedShips(GameState * game){
@@ -150,4 +155,5 @@ void renderPlacedShips(GameState * game){
             }
         }
     }
+    return;
 }

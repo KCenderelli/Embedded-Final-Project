@@ -1,4 +1,4 @@
 ../Core/Src/SharedPlayer.c:12:11:initGame	640	static
 ../Core/Src/SharedPlayer.c:35:6:StartScreenTouchLogic	16	static
-../Core/Src/SharedPlayer.c:46:6:returnToStart	8	static
-../Core/Src/SharedPlayer.c:51:6:placeShips	24	static
+../Core/Src/SharedPlayer.c:47:6:returnToStart	8	static
+../Core/Src/SharedPlayer.c:53:6:placeShips	24	static

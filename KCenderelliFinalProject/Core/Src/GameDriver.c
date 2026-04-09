@@ -23,6 +23,7 @@ uint8_t checkFlag(void){
 
 void  resetFlag(void){
 	statusFlag = 0;
+	return;
 }
 
 uint16_t getX(void){
@@ -39,28 +40,34 @@ void TouchLogic(GameState *game, uint16_t x, uint16_t y){
 		StartScreenTouchLogic(game, x,y);
 		if(game->mode == ONE_PLAYER_SETUP)
 		{
-			onePlayerStartUp();
+			onePlayerStartUp(game);
+			return;
 		}
 		else if(game->mode == TWO_PLAYER_SETUP)
 		{
-			twoPlayerStartUp();
+			twoPlayerStartUp(game);
+			return;
 		}
 	}
 	else if (game->mode == ONE_PLAYER_SETUP)
 	{
 		onePlayerPlaceShips(game, x, y);
+		return;
 	}
 	else if (game->mode == TWO_PLAYER_SETUP)
 	{
 		onePlayerPlaceShips(game, x, y);
+		return;
 	}
 	else if(game->mode == ONE_PLAYER)
 	{
 		onePlayerGameLogic(game, x, y);
+		return;
 	}
 	else if(game->mode == TWO_PLAYER)
 	{
 		twoPlayerGameLogic(game, x, y);
+		return;
 	}
 }
 

@@ -41,11 +41,13 @@ void StartScreenTouchLogic(GameState *game, uint16_t x, uint16_t y){
 	{
 		game->mode = TWO_PLAYER_SETUP;
 	}
+	return;
 }
 
 void returnToStart(void){
 	game.mode = START_SCREEN;
 	startScreenDisplay();
+	return;
 }
 
 void placeShips(GameState * game, uint16_t x, uint16_t y)
@@ -56,17 +58,5 @@ void placeShips(GameState * game, uint16_t x, uint16_t y)
 	game->placement.previewX = gridX;
 	game->placement.previewY = gridY;
 
-
-	//cover previous circules and move to new location
-
-//    uint16_t newX = (uint16_t)px;
-//    uint16_t newY = (uint16_t)py;
-//
-//    if (newX != prevX || newY != prevY)
-//    {
-//        LCD_Draw_Circle_Fill(prevX, prevY, BALL_RADIUS, BG_COLOR);
-//        LCD_Draw_Circle_Fill(newX,  newY,  BALL_RADIUS, BALL_COLOR);
-//        prevX = newX;
-//        prevY = newY;
-
+	return;
 }

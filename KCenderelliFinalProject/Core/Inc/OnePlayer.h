@@ -10,7 +10,7 @@
 
 #include "SharedPlayer.h"
 
-void onePlayerStartUp(void);
+void onePlayerStartUp(GameState * game);
 void onePlayerGameLogic(GameState * game, uint16_t x, uint16_t y);
 void onePlayerPlaceShips(GameState * game, uint16_t x, uint16_t y);
 
