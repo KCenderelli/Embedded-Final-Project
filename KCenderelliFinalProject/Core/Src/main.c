@@ -22,6 +22,8 @@
 
 static void SystemClock_Config(void);
 
+extern volatile GameState game;
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -55,7 +57,10 @@ int main(void)
 
   while (1)
   {
-
+	  if(game.mode == ONE_PLAYER_SETUP || game.mode == TWO_PLAYER_SETUP)
+	  {
+		  renderPlacementScreen(game);
+	  }
   }
 }
 

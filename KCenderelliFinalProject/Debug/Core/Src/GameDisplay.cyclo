@@ -1,5 +1,5 @@
 ../Core/Src/GameDisplay.c:11:6:startScreenDisplay	1
 ../Core/Src/GameDisplay.c:68:6:gridDisplay	1
 ../Core/Src/GameDisplay.c:90:6:rotationButtonDisplay	1
-../Core/Src/GameDisplay.c:107:6:ship2HorizontalDisplay	1
-../Core/Src/GameDisplay.c:112:6:ship2VerticalDisplay	1
+../Core/Src/GameDisplay.c:107:6:drawShipPreview	3
+../Core/Src/GameDisplay.c:124:6:renderPlacementScreen	1

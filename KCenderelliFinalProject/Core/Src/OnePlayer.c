@@ -8,9 +8,9 @@
 
 
 GameState onePlayerStartUp(GameState game, uint16_t x, uint16_t y){
-	clearScreen();
-	gridDisplay();
-	rotationButtonDisplay();
+    clearScreen();
+    gridDisplay();
+    rotationButtonDisplay();
 	game = placeShips(game, x, y);
 	return game;
 }

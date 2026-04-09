@@ -104,13 +104,31 @@ void rotationButtonDisplay(void){
 	LCD_DisplayChar(185,270,'E');
 }
 
-void ship2HorizontalDisplay(int x, int y)
+void drawShipPreview(Ship ship)
 {
-	LCD_Draw_Circle_Fill(x,y,10,LCD_COLOR_LIGHTBLUE);
-	LCD_Draw_Circle_Fill(x+30,y,10,LCD_COLOR_LIGHTBLUE);
+    for(int i = 0; i < ship.length; i++)
+    {
+        int drawX = ship.x;
+        int drawY = ship.y;
+
+        if(ship.orient == HORIZONTAL)
+            drawX += 30;
+        else
+            drawY += 30;
+
+        LCD_Draw_Circle_Fill(drawX, drawY, 20, LCD_COLOR_LIGHTBLUE);
+    }
 }
-void ship2VerticalDisplay(int x, int y)
+
+
+void renderPlacementScreen(GameState game)
 {
-	LCD_Draw_Circle_Fill(x,y,40,LCD_COLOR_LIGHTBLUE);
-	LCD_Draw_Circle_Fill(x,y+30,40,LCD_COLOR_LIGHTBLUE);
+    Ship previewShip;
+
+    previewShip.length = game.player1Ships[game.placement.currentShipIndex].length;
+    previewShip.x = game.placement.previewX;
+    previewShip.y = game.placement.previewY;
+    previewShip.orient = game.placement.currentOrientation;
+
+    drawShipPreview(previewShip);
 }

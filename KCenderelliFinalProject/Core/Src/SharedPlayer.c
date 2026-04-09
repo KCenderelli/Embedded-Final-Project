@@ -9,6 +9,31 @@
 
 volatile GameState game;
 
+
+GameState initGame(void)
+{
+    GameState game = {0};
+
+    game.mode = START_SCREEN;
+    game.currentPlayer = 1;
+
+    int lengths[3] = {2, 3, 4};
+    for(int i = 0; i < 3; i++)
+    {
+        game.player1Ships[i].length = lengths[i];
+        game.player2Ships[i].length = lengths[i];
+    }
+
+    game.placement.currentShipIndex = 1;
+    game.placement.currentOrientation = HORIZONTAL;
+    game.placement.previewX = 25;
+    game.placement.previewY = 25;
+
+    return game;
+}
+
+
+
 GameState StartScreenTouchLogic(uint16_t x, uint16_t y){
 	if(y >= 140 && y <= 200)
 	{
@@ -30,21 +55,20 @@ void returnToStart(void){
 
 GameState placeShips(GameState game, uint16_t x, uint16_t y)
 {
-	ship2HorizontalDisplay(25, 25);
-	if(x >= 10 && x <= 50 && y>= 255 && y<=300)
+	int gridX = (x - 10) / 30;
+	int gridY = (y - 10) / 30;
+
+	game.placement.previewX = gridX;
+	game.placement.previewY = gridY;
+
+	if (y >= 10 && y <140 && game.placement.currentOrientation == HORIZONTAL)
 	{
-		ship2HorizontalDisplay(25,25);
+	    game.placement.currentOrientation = VERTICAL;
 	}
-	if(x > 50 && x <= 90 && y>= 255 && y<=300)
+	else
 	{
-		ship2HorizontalDisplay(55,25);
-	}
-	if(x > 90 && x <= 300 && y>= 255 && y<=300)
-	{
-		ship2HorizontalDisplay(75,25);
+	    game.placement.currentOrientation = HORIZONTAL;
 	}
 
-
-//	game.Player1Ship2.boardlocation[x][y];
 	return game;
 }

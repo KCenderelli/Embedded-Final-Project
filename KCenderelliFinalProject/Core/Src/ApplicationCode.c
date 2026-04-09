@@ -39,13 +39,7 @@ void ApplicationInit(void)
 	#endif // TOUCH_INTERRUPT_ENABLED
 
 	#endif // COMPILE_TOUCH_FUNCTIONS
-	game.mode = START_SCREEN;
-	game.currentPlayer = 1;
-	game.Player1Ship2.partsHit[1] = 0;
-	game.Player1Ship2.partsHit[2] = 0;
-
-	game.Player2Ship2.partsHit[1] = 0;
-	game.Player2Ship2.partsHit[2] = 0;
+	initGame();
 }
 
 void LCD_Visual_Demo(void)
