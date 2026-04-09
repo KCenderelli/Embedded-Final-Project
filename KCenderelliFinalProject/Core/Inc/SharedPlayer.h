@@ -14,8 +14,8 @@
 #define Button_Press_MS   3000u
 
 void returnToStart(void);
-GameState StartScreenTouchLogic(uint16_t x, uint16_t y);
-GameState placeShips(GameState game, uint16_t x, uint16_t y);
+void StartScreenTouchLogic(GameState *game, uint16_t x, uint16_t y);
+void placeShips(GameState * game, uint16_t x, uint16_t y);
 GameState initGame(void);
 
 

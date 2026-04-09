@@ -22,7 +22,9 @@
 
 static void SystemClock_Config(void);
 
-extern volatile GameState game;
+extern GameState game;
+uint16_t x_main;
+uint16_t y_main;
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -59,9 +61,15 @@ int main(void)
 
   while (1)
   {
+	  if(checkFlag() == 1){
+		  resetFlag();
+		  x_main = getX();
+		  y_main = getY();
+		  TouchLogic(&game,x_main, y_main);
+	  }
 	  if(game.mode == ONE_PLAYER_SETUP || game.mode == TWO_PLAYER_SETUP)
 	  {
-		  renderPlacementScreen(game);
+		  renderPlacementScreen(&game);
 	  }
   }
 }

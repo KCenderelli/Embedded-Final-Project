@@ -39,7 +39,6 @@ void ApplicationInit(void)
 	#endif // TOUCH_INTERRUPT_ENABLED
 
 	#endif // COMPILE_TOUCH_FUNCTIONS
-	initGame();
 }
 
 void LCD_Visual_Demo(void)
@@ -122,7 +121,7 @@ void EXTI15_10_IRQHandler()
 		DetermineTouchPosition(&StaticTouchData);
 		/* Touch valid */
 		printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
-		TouchLogic(StaticTouchData.x, StaticTouchData.y);
+		setNewTouchFlag(StaticTouchData.x, StaticTouchData.y);
 
 	}else{
 		/* Touch not pressed */

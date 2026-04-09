@@ -11,6 +11,13 @@
 #include "OnePlayer.h"
 #include "TwoPlayer.h"
 
-void TouchLogic(uint16_t x, uint16_t y);
+void setNewTouchFlag(uint16_t x, uint16_t y);
+
+void TouchLogic(GameState *game, uint16_t x, uint16_t y);
+
+uint8_t checkFlag(void);
+void  resetFlag(void);
+uint16_t getX(void);
+uint16_t getY(void);
 
 #endif /* INC_GAMEDRIVER_H_ */

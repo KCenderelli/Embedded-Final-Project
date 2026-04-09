@@ -11,6 +11,6 @@
 #include "SharedPlayer.h"
 
 void twoPlayerStartUp(void);
-GameState twoPlayerGameLogic(GameState game, uint16_t x, uint16_t y);
+void twoPlayerGameLogic(GameState * game, uint16_t x, uint16_t y);
 
 #endif /* INC_TWOPLAYER_H_ */

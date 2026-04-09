@@ -64,7 +64,8 @@ void gridDisplay(void);
 void rotationButtonDisplay(void);
 void player1BoardDisplay(void);
 void player2BoardDisplay(void);
-void renderPlacementScreen(GameState game);
+void renderPlacementScreen(GameState * game);
+void renderPlacedShips(GameState *game);
 void drawShipPreview(Ship ship);
 
 #endif /* INC_GAMEDISPLAY_H_ */

@@ -12,7 +12,6 @@ void twoPlayerStartUp(void){
 	rotationButtonDisplay();
 }
 
-GameState twoPlayerGameLogic(GameState game, uint16_t x, uint16_t y){
+void twoPlayerGameLogic(GameState  *game, uint16_t x, uint16_t y){
 	gridDisplay();
-	return game;
 }

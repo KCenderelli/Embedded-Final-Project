@@ -1,1 +1,6 @@
-../Core/Src/GameDriver.c:11:6:TouchLogic	8
+../Core/Src/GameDriver.c:14:6:setNewTouchFlag	1
+../Core/Src/GameDriver.c:20:9:checkFlag	1
+../Core/Src/GameDriver.c:24:7:resetFlag	1
+../Core/Src/GameDriver.c:28:10:getX	1
+../Core/Src/GameDriver.c:32:10:getY	1
+../Core/Src/GameDriver.c:36:6:TouchLogic	8

@@ -7,8 +7,7 @@
 
 #include "SharedPlayer.h"
 
-volatile GameState game;
-
+GameState game;
 
 GameState initGame(void)
 {
@@ -33,19 +32,15 @@ GameState initGame(void)
 }
 
 
-
-GameState StartScreenTouchLogic(uint16_t x, uint16_t y){
+void StartScreenTouchLogic(GameState *game, uint16_t x, uint16_t y){
 	if(y >= 140 && y <= 200)
 	{
-		game.mode = ONE_PLAYER_SETUP;
-		return game;
+		game->mode = ONE_PLAYER_SETUP;
 	}
 	else if (y >= 10 && y <140)
 	{
-		game.mode = TWO_PLAYER_SETUP;
-		return game;
+		game->mode = TWO_PLAYER_SETUP;
 	}
-	return game;
 }
 
 void returnToStart(void){
@@ -53,13 +48,13 @@ void returnToStart(void){
 	startScreenDisplay();
 }
 
-GameState placeShips(GameState game, uint16_t x, uint16_t y)
+void placeShips(GameState * game, uint16_t x, uint16_t y)
 {
 	int gridX = (x - 10) / 30;
 	int gridY = (y - 10) / 30;
 
-	game.placement.previewX = gridX;
-	game.placement.previewY = gridY;
+	game->placement.previewX = gridX;
+	game->placement.previewY = gridY;
 
 
 	//cover previous circules and move to new location
@@ -74,5 +69,4 @@ GameState placeShips(GameState game, uint16_t x, uint16_t y)
 //        prevX = newX;
 //        prevY = newY;
 
-	return game;
 }
