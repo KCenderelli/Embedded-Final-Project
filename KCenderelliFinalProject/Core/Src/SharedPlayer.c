@@ -24,10 +24,10 @@ GameState initGame(void)
         game.player2Ships[i].length = lengths[i];
     }
 
-    game.placement.currentShipIndex = 1;
+    game.placement.currentShipIndex = 0;
     game.placement.currentOrientation = HORIZONTAL;
-    game.placement.previewX = 25;
-    game.placement.previewY = 25;
+    game.placement.previewX = 0;
+    game.placement.previewY = 0;
 
     return game;
 }
@@ -61,14 +61,18 @@ GameState placeShips(GameState game, uint16_t x, uint16_t y)
 	game.placement.previewX = gridX;
 	game.placement.previewY = gridY;
 
-	if (y >= 10 && y <140 && game.placement.currentOrientation == HORIZONTAL)
-	{
-	    game.placement.currentOrientation = VERTICAL;
-	}
-	else
-	{
-	    game.placement.currentOrientation = HORIZONTAL;
-	}
+
+	//cover previous circules and move to new location
+
+//    uint16_t newX = (uint16_t)px;
+//    uint16_t newY = (uint16_t)py;
+//
+//    if (newX != prevX || newY != prevY)
+//    {
+//        LCD_Draw_Circle_Fill(prevX, prevY, BALL_RADIUS, BG_COLOR);
+//        LCD_Draw_Circle_Fill(newX,  newY,  BALL_RADIUS, BALL_COLOR);
+//        prevX = newX;
+//        prevY = newY;
 
 	return game;
 }

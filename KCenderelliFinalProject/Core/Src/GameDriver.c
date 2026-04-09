@@ -23,11 +23,17 @@ void TouchLogic(uint16_t x, uint16_t y){
 	}
 	else if (game.mode == ONE_PLAYER_SETUP)
 	{
-
+		clearScreen();
+		gridDisplay();
+		rotationButtonDisplay();
+//		placeShips();
 	}
 	else if (game.mode == TWO_PLAYER_SETUP)
 	{
-
+		clearScreen();
+		gridDisplay();
+		rotationButtonDisplay();
+//		placeShips();
 	}
 	else if(game.mode == ONE_PLAYER)
 	{

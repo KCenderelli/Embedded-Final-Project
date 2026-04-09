@@ -49,6 +49,8 @@ int main(void)
 //  LCD_Visual_Demo();
   startScreenDisplay();
 
+  game = initGame();
+
 //  HAL_Delay(5000);
 
   // DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h

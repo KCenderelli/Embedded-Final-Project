@@ -108,15 +108,18 @@ void drawShipPreview(Ship ship)
 {
     for(int i = 0; i < ship.length; i++)
     {
-        int drawX = ship.x;
-        int drawY = ship.y;
+        int gridX = ship.x;
+        int gridY = ship.y;
 
         if(ship.orient == HORIZONTAL)
-            drawX += 30;
+            gridX += i;
         else
-            drawY += 30;
+            gridY += i;
 
-        LCD_Draw_Circle_Fill(drawX, drawY, 20, LCD_COLOR_LIGHTBLUE);
+        int pixelX = 10 + gridX * 30 + 15;
+        int pixelY = 10 + gridY * 30 + 15;
+
+        LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_LIGHTBLUE);
     }
 }
 

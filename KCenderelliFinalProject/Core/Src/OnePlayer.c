@@ -11,8 +11,8 @@ GameState onePlayerStartUp(GameState game, uint16_t x, uint16_t y){
     clearScreen();
     gridDisplay();
     rotationButtonDisplay();
-	game = placeShips(game, x, y);
-	return game;
+
+    return game;
 }
 
 GameState onePlayerGameLogic(GameState game, uint16_t x, uint16_t y){

@@ -1,5 +1,5 @@
 ../Core/Src/GameDisplay.c:11:6:startScreenDisplay	16	static
 ../Core/Src/GameDisplay.c:68:6:gridDisplay	8	static
 ../Core/Src/GameDisplay.c:90:6:rotationButtonDisplay	16	static
-../Core/Src/GameDisplay.c:107:6:drawShipPreview	24	static
-../Core/Src/GameDisplay.c:124:6:renderPlacementScreen	64	static
+../Core/Src/GameDisplay.c:107:6:drawShipPreview	32	static
+../Core/Src/GameDisplay.c:127:6:renderPlacementScreen	64	static
