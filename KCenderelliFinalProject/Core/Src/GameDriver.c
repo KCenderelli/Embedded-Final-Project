@@ -6,15 +6,19 @@
  */
 #include "GameDriver.h"
 
-extern GameState game;
+extern GameState * game;
 uint16_t x_stored;
 uint16_t y_stored;
 static uint8_t statusFlag = 0;
 
 void setNewTouchFlag(uint16_t x, uint16_t y){
-	statusFlag = 1;
-	x_stored = x;
-	y_stored = y;
+	if(statusFlag == 0)
+	{
+		statusFlag = 1;
+		x_stored = x;
+		y_stored = y;
+	}
+	return;
 }
 
 uint8_t checkFlag(void){
@@ -34,39 +38,39 @@ uint16_t getY(void){
 	return y_stored;
 }
 
-void TouchLogic(GameState *game, uint16_t x, uint16_t y){
+void TouchLogic(uint16_t x, uint16_t y){
 	if(game->mode == START_SCREEN)
 	{
-		StartScreenTouchLogic(game, x,y);
+		StartScreenTouchLogic(x,y);
 		if(game->mode == ONE_PLAYER_SETUP)
 		{
-			onePlayerStartUp(game);
+			onePlayerStartUp();
 			return;
 		}
 		else if(game->mode == TWO_PLAYER_SETUP)
 		{
-			twoPlayerStartUp(game);
+			twoPlayerStartUp();
 			return;
 		}
 	}
 	else if (game->mode == ONE_PLAYER_SETUP)
 	{
-		onePlayerPlaceShips(game, x, y);
+		onePlayerPlaceShips(x, y);
 		return;
 	}
 	else if (game->mode == TWO_PLAYER_SETUP)
 	{
-		onePlayerPlaceShips(game, x, y);
+		onePlayerPlaceShips(x, y);
 		return;
 	}
 	else if(game->mode == ONE_PLAYER)
 	{
-		onePlayerGameLogic(game, x, y);
+		onePlayerGameLogic(x, y);
 		return;
 	}
 	else if(game->mode == TWO_PLAYER)
 	{
-		twoPlayerGameLogic(game, x, y);
+		twoPlayerGameLogic(x, y);
 		return;
 	}
 }

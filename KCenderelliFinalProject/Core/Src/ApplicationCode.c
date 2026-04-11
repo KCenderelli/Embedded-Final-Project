@@ -9,7 +9,6 @@
 
 /* Static variables */
 
-extern volatile GameState game;
 extern void initialise_monitor_handles(void); 
 
 #if COMPILE_TOUCH_FUNCTIONS == 1
@@ -19,6 +18,7 @@ static EXTI_HandleTypeDef LCDTouchIRQ;
 void LCDTouchScreenInterruptGPIOInit(void);
 #endif // TOUCH_INTERRUPT_ENABLED
 #endif // COMPILE_TOUCH_FUNCTIONS
+
 
 void ApplicationInit(void)
 {
@@ -39,6 +39,38 @@ void ApplicationInit(void)
 	#endif // TOUCH_INTERRUPT_ENABLED
 
 	#endif // COMPILE_TOUCH_FUNCTIONS
+}
+
+//void processTouchIfPending(void)
+//{
+//    if(touchPending == 1)
+//    {
+//        touchPending = 0;
+//        HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+//        DetermineTouchPosition(&StaticTouchData);
+//		uint16_t x = StaticTouchData.x;
+//		uint16_t y = StaticTouchData.y;
+//		HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+//
+//        printf("\nX: %03d\nY: %03d\n", x, y);
+//        TouchLogic(x, y);
+//    }
+//}
+
+void processTouchIfPending(void)
+{
+    if(touchPending == 1)
+    {
+        HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+        touchPending = 0;
+        DetermineTouchPosition(&StaticTouchData);
+        uint16_t x = StaticTouchData.x;
+        uint16_t y = StaticTouchData.y;
+        HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+        printf("\nX: %03d\nY: %03d\n", x, y);
+        TouchLogic(x, y);
+    }
 }
 
 void LCD_Visual_Demo(void)
@@ -72,7 +104,7 @@ void LCDTouchScreenInterruptGPIOInit(void)
 {
 	GPIO_InitTypeDef LCDConfig = {0};
     LCDConfig.Pin = GPIO_PIN_15;
-    LCDConfig.Mode = GPIO_MODE_IT_RISING_FALLING;
+    LCDConfig.Mode = GPIO_MODE_IT_FALLING;
     LCDConfig.Pull = GPIO_NOPULL;
     LCDConfig.Speed = GPIO_SPEED_FREQ_HIGH;
     
@@ -113,15 +145,12 @@ void EXTI15_10_IRQHandler()
 		isTouchDetected = true;
 	}
 
+
 	// Determine if it is pressed or unpressed
 	if(isTouchDetected) // Touch has been detected
 	{
+		touchPending = 1;
 		printf("\nPressed");
-		// May need to do numerous retries? 
-		DetermineTouchPosition(&StaticTouchData);
-		/* Touch valid */
-		printf("\nX: %03d\nY: %03d \n", StaticTouchData.x, StaticTouchData.y);
-		setNewTouchFlag(StaticTouchData.x, StaticTouchData.y);
 
 	}else{
 		/* Touch not pressed */

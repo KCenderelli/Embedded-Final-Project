@@ -1,4 +1,6 @@
-../Core/Src/SharedPlayer.c:12:11:initGame	2
-../Core/Src/SharedPlayer.c:35:6:StartScreenTouchLogic	5
-../Core/Src/SharedPlayer.c:47:6:returnToStart	1
-../Core/Src/SharedPlayer.c:53:6:placeShips	1
+../Core/Src/SharedPlayer.c:14:13:initGame	2
+../Core/Src/SharedPlayer.c:34:6:StartScreenTouchLogic	5
+../Core/Src/SharedPlayer.c:46:6:returnToStart	1
+../Core/Src/SharedPlayer.c:53:9:checkValidPlacement	8
+../Core/Src/SharedPlayer.c:73:6:placeShips	14
+../Core/Src/SharedPlayer.c:135:6:buttonCheck	7

@@ -22,9 +22,10 @@
 
 static void SystemClock_Config(void);
 
-extern GameState game;
+extern GameState * game;
 uint16_t x_main;
 uint16_t y_main;
+extern volatile uint8_t touchPending;
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -51,29 +52,17 @@ int main(void)
 //  LCD_Visual_Demo();
   startScreenDisplay();
 
-  game = initGame();
+  initGame();
 
 //  HAL_Delay(5000);
 
   // DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h
   // Un-comment the below function after setting COMPILE_TOUCH to 1 in stmpe811.h
-//  LCD_Touch_Polling_Demo(); // This function Will not return
-
-  while (1)
+  while(1)
   {
-	  if(checkFlag() == 1){
-		  resetFlag();
-		  x_main = getX();
-		  y_main = getY();
-		  TouchLogic(&game,x_main, y_main);
-	  }
-	  if(game.mode == ONE_PLAYER_SETUP || game.mode == TWO_PLAYER_SETUP)
-	  {
-		  renderPlacedShips(&game);
-	  }
+      processTouchIfPending();
   }
 }
-
 /**
   * @brief  System Clock Configuration
   *         configured as follows :

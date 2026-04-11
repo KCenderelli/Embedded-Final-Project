@@ -10,13 +10,19 @@
 
 #include "GameDisplay.h"
 
+#include <stdio.h>
+
 
 #define Button_Press_MS   3000u
 
+extern GameState * game;
+
 void returnToStart(void);
-void StartScreenTouchLogic(GameState *game, uint16_t x, uint16_t y);
-void placeShips(GameState * game, uint16_t x, uint16_t y);
-GameState initGame(void);
+void StartScreenTouchLogic(uint16_t x, uint16_t y);
+void placeShips(uint16_t x, uint16_t y);
+GameState * initGame(void);
+uint8_t checkValidPlacement(int x, int y);
+void buttonCheck(uint16_t x, uint16_t y);
 
 
 #endif /* INC_SHAREDPLAYER_H_ */

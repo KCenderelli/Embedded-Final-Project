@@ -6,15 +6,17 @@
  */
 #include "TwoPlayer.h"
 
-void twoPlayerStartUp(GameState * game){
+extern GameState * game;
+
+void twoPlayerStartUp(void){
 	clearScreen();
 	gridDisplay();
 	rotationButtonDisplay();
-	renderPlacementScreen(game);
+	renderPlacementScreen();
 	return;
 }
 
-void twoPlayerGameLogic(GameState  *game, uint16_t x, uint16_t y){
+void twoPlayerGameLogic(uint16_t x, uint16_t y){
 	gridDisplay();
 	return;
 }

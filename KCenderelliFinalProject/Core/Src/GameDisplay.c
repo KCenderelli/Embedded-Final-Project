@@ -8,6 +8,7 @@
 
 #include "GameDisplay.h"
 
+
 void startScreenDisplay(void){
 //	for(uint16_t x = 0; x < (LCD_PIXEL_WIDTH_X/5)-1; x++){
 //			for(uint16_t y = 0; y < (LCD_PIXEL_HEIGHT_Y/5)-1; y++){
@@ -107,14 +108,21 @@ void rotationButtonDisplay(void){
 	return;
 }
 
-void drawShipPreview(Ship ship)
+void drawShipPreview(void)
 {
-    for(int i = 0; i < ship.length; i++)
-    {
-        int gridX = ship.x;
-        int gridY = ship.y;
+	Ship previewShip;
 
-        if(ship.orient == HORIZONTAL)
+	previewShip.length = game->player1Ships[game->placement.currentShipIndex].length;
+	previewShip.x = game->placement.previewX;
+	previewShip.y = game->placement.previewY;
+	previewShip.orient = game->placement.currentOrientation;
+
+    for(int i = 0; i < previewShip.length; i++)
+    {
+        int gridX = previewShip.x;
+        int gridY = previewShip.y;
+
+        if(previewShip.orient == HORIZONTAL)
             gridX += i;
         else
             gridY += i;
@@ -128,7 +136,7 @@ void drawShipPreview(Ship ship)
 }
 
 
-void renderPlacementScreen(GameState * game)
+void renderPlacementScreen(void)
 {
     Ship previewShip;
 
@@ -137,11 +145,13 @@ void renderPlacementScreen(GameState * game)
     previewShip.y = game->placement.previewY;
     previewShip.orient = game->placement.currentOrientation;
 
-    drawShipPreview(previewShip);
+    printf("Rendering at: x=%d y=%d\n", game->placement.previewX, game->placement.previewY);
+
+    drawShipPreview();
     return;
 }
 
-void renderPlacedShips(GameState * game){
+void renderPlacedShips(void){
     for(int y = 0; y < 7; y++)
     {
         for(int x = 0; x < 7; x++)

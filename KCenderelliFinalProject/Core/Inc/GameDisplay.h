@@ -10,7 +10,7 @@
 
 #include "LCD_Driver.h"
 
-
+#include <stdio.h>
 
 typedef enum {
 	START_SCREEN,
@@ -58,14 +58,16 @@ typedef struct {
     PlacementState placement;
 } GameState;
 
+extern GameState * game;
+
 
 void startScreenDisplay(void);
 void gridDisplay(void);
 void rotationButtonDisplay(void);
 void player1BoardDisplay(void);
 void player2BoardDisplay(void);
-void renderPlacementScreen(GameState * game);
-void renderPlacedShips(GameState *game);
-void drawShipPreview(Ship ship);
+void renderPlacementScreen(void);
+void renderPlacedShips(void);
+void drawShipPreview(void);
 
 #endif /* INC_GAMEDISPLAY_H_ */

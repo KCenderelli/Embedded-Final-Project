@@ -11,9 +11,10 @@
 #include "OnePlayer.h"
 #include "TwoPlayer.h"
 
-void setNewTouchFlag(uint16_t x, uint16_t y);
+extern GameState * game;
 
-void TouchLogic(GameState *game, uint16_t x, uint16_t y);
+void setNewTouchFlag(uint16_t x, uint16_t y);
+void TouchLogic(uint16_t x, uint16_t y);
 
 uint8_t checkFlag(void);
 void  resetFlag(void);

@@ -7,24 +7,25 @@
 #include "OnePlayer.h"
 
 
-void onePlayerStartUp(GameState * game){
+void onePlayerStartUp(void){
     clearScreen();
     gridDisplay();
     rotationButtonDisplay();
-    renderPlacementScreen(game);
+    renderPlacementScreen();
     return;
 }
 
-void onePlayerPlaceShips(GameState * game, uint16_t x, uint16_t y){
+void onePlayerPlaceShips(uint16_t x, uint16_t y){
     clearScreen();
     gridDisplay();
     rotationButtonDisplay();
-    renderPlacementScreen(game);
-    placeShips(game, x, y);
+	placeShips(x, y);
+    buttonCheck(x,y);
+    renderPlacementScreen();
     return;
 }
 
-void onePlayerGameLogic(GameState * game, uint16_t x, uint16_t y){
+void onePlayerGameLogic(uint16_t x, uint16_t y){
 	gridDisplay();
 	return;
 }
