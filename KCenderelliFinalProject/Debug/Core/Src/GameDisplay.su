@@ -2,8 +2,9 @@
 ../Core/Src/GameDisplay.c:61:6:gridDisplay	8	static
 ../Core/Src/GameDisplay.c:84:6:rotationButtonDisplay	16	static
 ../Core/Src/GameDisplay.c:104:6:guessButtonDisplay	16	static
-../Core/Src/GameDisplay.c:119:6:drawShipPreview	64	static
-../Core/Src/GameDisplay.c:146:6:drawGuessPreview	16	static
-../Core/Src/GameDisplay.c:155:6:renderPlacementScreen	8	static
-../Core/Src/GameDisplay.c:163:6:renderPlacedShips	40	static
-../Core/Src/GameDisplay.c:191:6:renderGuesses	40	static
+../Core/Src/GameDisplay.c:119:6:nextButtonDisplay	16	static
+../Core/Src/GameDisplay.c:132:6:drawShipPreview	64	static
+../Core/Src/GameDisplay.c:159:6:drawGuessPreview	16	static
+../Core/Src/GameDisplay.c:168:6:renderPlacementScreen	8	static
+../Core/Src/GameDisplay.c:176:6:renderPlacedShips	40	static
+../Core/Src/GameDisplay.c:204:6:renderGuesses	40	static

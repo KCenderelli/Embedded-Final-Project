@@ -1,5 +1,6 @@
 ../Core/Src/OnePlayer.c:10:6:onePlayerStartUp	1
 ../Core/Src/OnePlayer.c:18:6:onePlayerPlaceShips	1
 ../Core/Src/OnePlayer.c:31:6:AIPlaceShips	6
-../Core/Src/OnePlayer.c:75:6:onePlayerGuess	14
-../Core/Src/OnePlayer.c:124:6:onePlayerGameLogic	1
+../Core/Src/OnePlayer.c:75:6:AIGuess	12
+../Core/Src/OnePlayer.c:138:6:onePlayerGuess	10
+../Core/Src/OnePlayer.c:176:6:onePlayerGameLogic	3

@@ -227,47 +227,101 @@ void buttonCheck(uint16_t x, uint16_t y){
 	}
 }
 
+//
+//void guessButtonCheck(uint16_t x, uint16_t y){
+//    if(y >= 0 && y <= 60)
+//    {
+//        if(x > 100 && x <= 200)
+//        {
+//            int gridX = game->guess.previewX;
+//            int gridY = game->guess.previewY;
+//
+//            if(checkGuessValidPlacement(gridX, gridY) == 1)
+//            {
+//                if(game->currentPlayer == 1)
+//                {
+//                    if(game->Player2Board[gridY][gridX] == 1)
+//                    {
+//                        game->Player2Board[gridY][gridX] = 2;
+//                        game->Player1Guesses[gridY][gridX] = 2;
+//                    }
+//                    else
+//                    {
+//                        game->Player1Guesses[gridY][gridX] = 1;
+//                    }
+//                }
+//                else if(game->currentPlayer == 2)
+//                {
+//                    if(game->Player1Board[gridY][gridX] == 1)
+//                    {
+//                        game->Player1Board[gridY][gridX] = 2;
+//                        game->Player2Guesses[gridY][gridX] = 2;
+//                    }
+//                    else
+//                    {
+//                        game->Player2Guesses[gridY][gridX] = 1;
+//                    }
+//                }
+//
+//                game->guess.previewX = 0;
+//                game->guess.previewY = 0;
+//            }
+//            if(game->currentPlayer == 1)
+//            {
+//                if(game->Player2Board[gridY][gridX] == 1)
+//                {
+//                    game->Player2Board[gridY][gridX] = 2;
+//                    game->Player1Guesses[gridY][gridX] = 2;
+//                }
+//                else
+//                {
+//                    game->Player1Guesses[gridY][gridX] = 1;
+//                    game->currentPlayer = 0;
+//                }
+//
+//                game->guess.previewX = 0;
+//                game->guess.previewY = 0;
+//            }
+//        }
+//    }
+//}
 
 void guessButtonCheck(uint16_t x, uint16_t y){
     if(y >= 0 && y <= 60)
     {
-        if(x > 100 && x <= 200)
-        {
-            int gridX = game->guess.previewX;
-            int gridY = game->guess.previewY;
+		int gridX = game->guess.previewX;
+		int gridY = game->guess.previewY;
 
-            if(checkGuessValidPlacement(gridX, gridY) == 1)
-            {
-                if(game->currentPlayer == 1)
-                {
-                    if(game->Player2Board[gridY][gridX] == 1)
-                    {
-                        game->Player2Board[gridY][gridX] = 2;
-                        game->Player1Guesses[gridY][gridX] = 2;
-                    }
-                    else
-                    {
-                        game->Player1Guesses[gridY][gridX] = 1;
-                    }
-                }
-                else if(game->currentPlayer == 2)
-                {
-                    if(game->Player1Board[gridY][gridX] == 1)
-                    {
-                        game->Player1Board[gridY][gridX] = 2;
-                        game->Player2Guesses[gridY][gridX] = 2;
-                    }
-                    else
-                    {
-                        game->Player2Guesses[gridY][gridX] = 1;
-                    }
-                }
-
-                game->guess.previewX = 0;
-                game->guess.previewY = 0;
-            }
-        }
+		if(checkGuessValidPlacement(gridX, gridY) == 1)
+		{
+			if(game->currentPlayer == 1)
+			{
+				if(game->Player2Board[gridY][gridX] == 1)
+				{
+					game->Player2Board[gridY][gridX] = 2;
+					game->Player1Guesses[gridY][gridX] = 2;
+				}
+				else
+				{
+					game->Player1Guesses[gridY][gridX] = 1;
+					game->currentPlayer = 0;
+				}
+				game->guess.previewX = 0;
+				game->guess.previewY = 0;
+			}
+		}
     }
 }
 
-
+void nextButtonCheck(uint16_t x, uint16_t y){
+    if(y >= 0 && y <= 60)
+    {
+		if(game->mode == ONE_PLAYER_AI_REVEAL)
+		{
+			game->mode = ONE_PLAYER;
+			game->currentPlayer = 1;
+			game->guess.previewX = 0;
+			game->guess.previewY = 0;
+        }
+    }
+}

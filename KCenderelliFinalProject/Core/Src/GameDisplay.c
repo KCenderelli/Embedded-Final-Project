@@ -116,6 +116,19 @@ void guessButtonDisplay(void){
 	return;
 }
 
+void nextButtonDisplay(void){
+	LCD_Draw_Square_Fill(125,260,25,90,LCD_COLOR_LIGHTBLUE);
+
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
+
+	LCD_DisplayChar(80,250,'N');
+	LCD_DisplayChar(105,250,'E');
+	LCD_DisplayChar(125,250,'X');
+	LCD_DisplayChar(145,250,'T');
+	return;
+}
+
 void drawShipPreview(void)
 {
 	Ship previewShip;
@@ -148,7 +161,7 @@ void drawGuessPreview(void)
 	int pixelX = 10 + game->guess.previewX * 30 + 15;
 	int pixelY = 10 + game->guess.previewY * 30 + 15;
 
-	LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_DARKYELLOW);
+	LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_LIGHTRED);
 }
 
 
@@ -177,7 +190,7 @@ void renderPlacedShips(void){
                 int pixelY = 10 + y * 30 + 15;
                 LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
             }
-            if(cellValue == 2)
+            if(cellValue == 2) // HIT
             {
                 int pixelX = 10 + x * 30 + 15;
                 int pixelY = 10 + y * 30 + 15;
@@ -203,7 +216,7 @@ void renderGuesses(void){
             {
                 int pixelX = 10 + x * 30 + 15;
                 int pixelY = 10 + y * 30 + 15;
-                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
+                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_LIGHTYELLOW);
             }
             if(cellValue == 2)
             {

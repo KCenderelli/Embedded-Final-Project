@@ -63,6 +63,11 @@ void TouchLogic(uint16_t x, uint16_t y){
 		onePlayerGameLogic(x, y);
 		return;
 	}
+	else if(game->mode == ONE_PLAYER_AI_REVEAL)
+	{
+	    onePlayerGameLogic(x, y);
+	    return;
+	}
 	else if(game->mode == TWO_PLAYER)
 	{
 		twoPlayerGameLogic(x, y);

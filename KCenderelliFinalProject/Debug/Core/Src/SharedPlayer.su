@@ -5,4 +5,5 @@
 ../Core/Src/SharedPlayer.c:98:9:checkGuessValidPlacement	16	static
 ../Core/Src/SharedPlayer.c:106:6:placeShips	24	static
 ../Core/Src/SharedPlayer.c:156:6:buttonCheck	40	static
-../Core/Src/SharedPlayer.c:231:6:guessButtonCheck	24	static
+../Core/Src/SharedPlayer.c:289:6:guessButtonCheck	24	static
+../Core/Src/SharedPlayer.c:316:6:nextButtonCheck	16	static

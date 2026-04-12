@@ -18,6 +18,7 @@ typedef enum {
 	AI_SETUP,
 	TWO_PLAYER_SETUP,
     ONE_PLAYER,
+	ONE_PLAYER_AI_REVEAL,
 	TWO_PLAYER,
     MODE_GAME_OVER
 } GameMode;
@@ -88,5 +89,7 @@ void drawShipPreview(void);
 void drawGuessPreview(void);
 void renderGuesses(void);
 void guessButtonDisplay(void);
+void nextButtonDisplay(void);
+
 
 #endif /* INC_GAMEDISPLAY_H_ */

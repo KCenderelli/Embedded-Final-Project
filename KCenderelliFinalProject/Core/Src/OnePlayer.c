@@ -72,6 +72,69 @@ void AIPlaceShips(void)
 	game->mode = ONE_PLAYER;
 }
 
+void AIGuess(void)
+{
+    game->currentPlayer = 0;
+    int gridX = -1;
+    int gridY = -1;
+    uint8_t guessSet = 0;
+
+    for(int y = 0; y < 7 && !guessSet; y++)
+    {
+        for(int x = 0; x < 7 && !guessSet; x++)
+        {
+            if(game->Player2Guesses[y][x] == 2)
+            {
+                int neighborsX[4] = {x,   x,   x-1, x+1};
+                int neighborsY[4] = {y-1, y+1, y,   y  };
+
+                for(int n = 0; n < 4; n++)
+                {
+                    int nx = neighborsX[n];
+                    int ny = neighborsY[n];
+                    if(checkGuessValidPlacement(nx, ny) == 1)
+                    {
+                        gridX = nx;
+                        gridY = ny;
+                        guessSet = 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    if(!guessSet)
+    {
+        while(!guessSet)
+        {
+            uint32_t rng1, rng2;
+            HAL_RNG_GenerateRandomNumber(&hrng, &rng1);
+            HAL_RNG_GenerateRandomNumber(&hrng, &rng2);
+
+            gridX = rng1 % 7;
+            gridY = rng2 % 7;
+
+            if(checkGuessValidPlacement(gridX, gridY) == 1)
+            {
+                guessSet = 1;
+            }
+        }
+    }
+
+    if(game->Player1Board[gridY][gridX] == 1)
+    {
+        game->Player1Board[gridY][gridX] = 2;
+        game->Player2Guesses[gridY][gridX] = 2;
+    }
+    else
+    {
+        game->Player2Guesses[gridY][gridX] = 1;
+    }
+
+    game->currentPlayer = 1;
+}
+
 void onePlayerGuess(uint16_t x, uint16_t y){
 	int gridX = -1;
 	int gridY = -1;
@@ -83,18 +146,12 @@ void onePlayerGuess(uint16_t x, uint16_t y){
 			if(x < 84)
 			{
 				gridX = game->guess.previewX - 1;
-				if(checkGuessValidPlacement(gridX, gridY) == 1)
-				{
-					game->guess.previewX = gridX;  // move left
-				}
+				game->guess.previewX = gridX;
 			}
 			else if(x > 168)
 			{
 				gridX = game->guess.previewX + 1;
-				if(checkGuessValidPlacement(gridX, gridY) == 1)
-				{
-					game->guess.previewX = gridX;  // move right
-				}
+				game->guess.previewX = gridX;
 			}
 		}
 		if(x >= 84 && x <= 168)
@@ -103,31 +160,44 @@ void onePlayerGuess(uint16_t x, uint16_t y){
 			if(y < 190)
 			{
 				gridY = game->guess.previewY + 1;
-				if(checkGuessValidPlacement(gridX, gridY) == 1)
-				{
-					game->guess.previewY = gridY;  // move down
-				}
+				game->guess.previewY = gridY;
 			}
 			else if(y >= 190)
 			{
 				gridY = game->guess.previewY - 1;
-				if(checkGuessValidPlacement(gridX, gridY) == 1)
-				{
-					game->guess.previewY = gridY;  // move up
-				}
+				game->guess.previewY = gridY;
 			}
 		}
 	}
 	return;
 }
 
+
 void onePlayerGameLogic(uint16_t x, uint16_t y){
-	clearScreen();
-	gridDisplay();
-	guessButtonDisplay();
-	onePlayerGuess(x, y);
-	guessButtonCheck(x, y);
-	renderGuesses();
-	drawGuessPreview();
-	return;
+    clearScreen();
+    gridDisplay();
+
+    if(game->mode == ONE_PLAYER_AI_REVEAL)
+    {
+        nextButtonDisplay();
+        renderPlacedShips();
+        renderGuesses();
+        nextButtonCheck(x, y);
+        return;
+    }
+
+    guessButtonDisplay();
+    onePlayerGuess(x, y);
+    guessButtonCheck(x, y);
+
+    if(game->currentPlayer == 0)
+    {
+
+        AIGuess();
+        game->mode = ONE_PLAYER_AI_REVEAL;
+    }
+
+    renderGuesses();
+    drawGuessPreview();
+    return;
 }
