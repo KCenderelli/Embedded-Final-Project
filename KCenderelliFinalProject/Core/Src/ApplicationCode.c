@@ -41,28 +41,11 @@ void ApplicationInit(void)
 	#endif // COMPILE_TOUCH_FUNCTIONS
 }
 
-//void processTouchIfPending(void)
-//{
-//    if(touchPending == 1)
-//    {
-//        touchPending = 0;
-//        HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
-//        DetermineTouchPosition(&StaticTouchData);
-//		uint16_t x = StaticTouchData.x;
-//		uint16_t y = StaticTouchData.y;
-//		HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-//
-//        printf("\nX: %03d\nY: %03d\n", x, y);
-//        TouchLogic(x, y);
-//    }
-//}
-
 void processTouchIfPending(void)
 {
     if(touchPending == 1)
     {
         HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
-        touchPending = 0;
         DetermineTouchPosition(&StaticTouchData);
         uint16_t x = StaticTouchData.x;
         uint16_t y = StaticTouchData.y;
@@ -70,8 +53,10 @@ void processTouchIfPending(void)
 
         printf("\nX: %03d\nY: %03d\n", x, y);
         TouchLogic(x, y);
+        touchPending = 0;
     }
 }
+
 
 void LCD_Visual_Demo(void)
 {
@@ -152,7 +137,8 @@ void EXTI15_10_IRQHandler()
 		touchPending = 1;
 		printf("\nPressed");
 
-	}else{
+	}
+	else{
 		/* Touch not pressed */
 		printf("\nNot pressed \n");
 	}

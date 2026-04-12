@@ -42,20 +42,15 @@ void TouchLogic(uint16_t x, uint16_t y){
 	if(game->mode == START_SCREEN)
 	{
 		StartScreenTouchLogic(x,y);
-		if(game->mode == ONE_PLAYER_SETUP)
-		{
-			onePlayerStartUp();
-			return;
-		}
-		else if(game->mode == TWO_PLAYER_SETUP)
-		{
-			twoPlayerStartUp();
-			return;
-		}
 	}
 	else if (game->mode == ONE_PLAYER_SETUP)
 	{
 		onePlayerPlaceShips(x, y);
+		return;
+	}
+	else if(game->mode == AI_SETUP)
+	{
+		AIPlaceShips();
 		return;
 	}
 	else if (game->mode == TWO_PLAYER_SETUP)

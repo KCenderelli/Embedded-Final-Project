@@ -35,10 +35,18 @@ void StartScreenTouchLogic(uint16_t x, uint16_t y){
 	if(y >= 140 && y <= 200)
 	{
 		game->mode = ONE_PLAYER_SETUP;
+		clearScreen();
+		gridDisplay();
+		rotationButtonDisplay();
+		renderPlacementScreen();
 	}
 	else if (y >= 10 && y <140)
 	{
 		game->mode = TWO_PLAYER_SETUP;
+		clearScreen();
+		gridDisplay();
+		rotationButtonDisplay();
+		renderPlacementScreen();
 	}
 	return;
 }
@@ -50,6 +58,25 @@ void returnToStart(void){
 }
 
 
+//uint8_t checkValidPlacement(int x, int y){
+//    if(x < 0 || y < 0) return 0;
+//
+//    Ship * ship = &game->player1Ships[game->placement.currentShipIndex];
+//
+//    if(game->placement.currentOrientation == HORIZONTAL)
+//    {
+//        if(x + ship->length > 7) return 0;  // ship runs off right edge
+//        if(y > 6)                return 0;
+//    }
+//    else // VERTICAL
+//    {
+//        if(x > 6)                return 0;
+//        if(y + ship->length > 7) return 0;  // ship runs off bottom edge
+//    }
+//
+//    return 1;
+//}
+
 uint8_t checkValidPlacement(int x, int y){
     if(x < 0 || y < 0) return 0;
 
@@ -57,18 +84,31 @@ uint8_t checkValidPlacement(int x, int y){
 
     if(game->placement.currentOrientation == HORIZONTAL)
     {
-        if(x + ship->length > 7) return 0;  // ship runs off right edge
+        if(x + ship->length > 7) return 0;
         if(y > 6)                return 0;
+
+        // check each cell the ship would occupy
+        for(int i = 0; i < ship->length; i++)
+        {
+            if(game->currentPlayer == 1 && game->Player1Board[y][x + i] != 0) return 0;
+            if(game->currentPlayer == 2 && game->Player2Board[y][x + i] != 0) return 0;
+        }
     }
     else // VERTICAL
     {
         if(x > 6)                return 0;
-        if(y + ship->length > 7) return 0;  // ship runs off bottom edge
+        if(y + ship->length > 7) return 0;
+
+        // check each cell the ship would occupy
+        for(int i = 0; i < ship->length; i++)
+        {
+            if(game->currentPlayer == 1 && game->Player1Board[y + i][x] != 0) return 0;
+            if(game->currentPlayer == 2 && game->Player2Board[y + i][x] != 0) return 0;
+        }
     }
 
     return 1;
 }
-
 
 void placeShips(uint16_t x, uint16_t y)
 {
@@ -84,10 +124,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridX = game->placement.previewX - 1;
                 if(checkValidPlacement(gridX, gridY) == 1)
                 {
-                	printf("Before: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-                	game->placement.previewX = gridX;
-                	printf("After: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-//                    game->placement.previewX = gridX;  // move left
+                    game->placement.previewX = gridX;  // move left
                 }
             }
             else if(x > 168)
@@ -95,10 +132,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridX = game->placement.previewX + 1;
                 if(checkValidPlacement(gridX, gridY) == 1)
                 {
-                	printf("Before: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-                	game->placement.previewX = gridX;
-                	printf("After: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-//                    game->placement.previewX = gridX;  // move right
+                    game->placement.previewX = gridX;  // move right
                 }
             }
         }
@@ -110,10 +144,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridY = game->placement.previewY + 1;
 				if(checkValidPlacement(gridX, gridY) == 1)
 				{
-					printf("Before: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-					game->placement.previewY = gridY;
-					printf("After: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-//					game->placement.previewY = gridY;  // move down
+					game->placement.previewY = gridY;  // move down
 				}
             }
             else if(y >= 190)
@@ -121,10 +152,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridY = game->placement.previewY - 1;
 				if(checkValidPlacement(gridX, gridY) == 1)
 				{
-					printf("Before: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-					game->placement.previewY = gridY;
-					printf("After: previewX=%d previewY=%d\n", game->placement.previewX, game->placement.previewY);
-//					game->placement.previewY = gridY;  // move up
+					game->placement.previewY = gridY;  // move up
 				}
             }
 		}
@@ -154,10 +182,55 @@ void buttonCheck(uint16_t x, uint16_t y){
 				}
 			}
 		}
-//		else if(x > 100 && x<= 200)
-//		{
-//			//ADD SHIP TO PLAYERBOARD place
-//		}
+		else if(x > 100 && x<= 200)
+		{
+			int gridX = game->placement.previewX;
+			int gridY = game->placement.previewY;
+			if(checkValidPlacement(gridX, gridY) == 1){
+				if(game->currentPlayer == 0)
+				{
+					for(int i = 0; i < game->player2Ships[game->placement.currentShipIndex].length; i++)
+					{
+						game->Player2Board[gridX][gridY] = 1;
+						if(game->placement.currentOrientation == HORIZONTAL)
+							gridX += i;
+						else
+							gridY += i;
+					}
+				}
+				else if (game->currentPlayer == 1)
+				{
+					for(int i = 0; i < game->player1Ships[game->placement.currentShipIndex].length; i++)
+					{
+					    if(game->placement.currentOrientation == HORIZONTAL)
+					        game->Player1Board[gridY][gridX + i] = 1;  // i is the offset, gridX unchanged
+					    else
+					        game->Player1Board[gridY + i][gridX] = 1;  // i is the offset, gridY unchanged
+					}
+					if(game->placement.currentShipIndex < 2)
+					{
+						game->placement.currentShipIndex++;
+						game->placement.previewX = 0;
+						game->placement.previewY = 0;
+					}
+					else
+					{
+						game->mode = AI_SETUP;
+					}
+				}
+				else if(game->currentPlayer == 2)
+				{
+					for(int i = 0; i < game->player2Ships[game->placement.currentShipIndex].length; i++)
+					{
+						game->Player2Board[gridX][gridY] = 1;
+						if(game->placement.currentOrientation == HORIZONTAL)
+							gridX += i;
+						else
+							gridY += i;
+					}
+				}
+			}
+		}
 	}
 }
 

@@ -3,4 +3,4 @@
 ../Core/Src/GameDisplay.c:93:6:rotationButtonDisplay	1
 ../Core/Src/GameDisplay.c:111:6:drawShipPreview	3
 ../Core/Src/GameDisplay.c:139:6:renderPlacementScreen	1
-../Core/Src/GameDisplay.c:154:6:renderPlacedShips	4
+../Core/Src/GameDisplay.c:147:6:renderPlacedShips	5

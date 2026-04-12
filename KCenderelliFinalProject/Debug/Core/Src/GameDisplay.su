@@ -2,5 +2,5 @@
 ../Core/Src/GameDisplay.c:70:6:gridDisplay	8	static
 ../Core/Src/GameDisplay.c:93:6:rotationButtonDisplay	16	static
 ../Core/Src/GameDisplay.c:111:6:drawShipPreview	64	static
-../Core/Src/GameDisplay.c:139:6:renderPlacementScreen	40	static
-../Core/Src/GameDisplay.c:154:6:renderPlacedShips	24	static
+../Core/Src/GameDisplay.c:139:6:renderPlacementScreen	8	static
+../Core/Src/GameDisplay.c:147:6:renderPlacedShips	32	static

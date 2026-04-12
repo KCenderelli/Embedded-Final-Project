@@ -3,4 +3,4 @@
 ../Core/Src/GameDriver.c:28:7:resetFlag	1
 ../Core/Src/GameDriver.c:33:10:getX	1
 ../Core/Src/GameDriver.c:37:10:getY	1
-../Core/Src/GameDriver.c:41:6:TouchLogic	8
+../Core/Src/GameDriver.c:41:6:TouchLogic	7

@@ -138,13 +138,6 @@ void drawShipPreview(void)
 
 void renderPlacementScreen(void)
 {
-    Ship previewShip;
-
-    previewShip.length = game->player1Ships[game->placement.currentShipIndex].length;
-    previewShip.x = game->placement.previewX;
-    previewShip.y = game->placement.previewY;
-    previewShip.orient = game->placement.currentOrientation;
-
     printf("Rendering at: x=%d y=%d\n", game->placement.previewX, game->placement.previewY);
 
     drawShipPreview();
@@ -156,14 +149,18 @@ void renderPlacedShips(void){
     {
         for(int x = 0; x < 7; x++)
         {
-            if(game->Player1Board[y][x] == 1) // ship present
+            if(game->Player1Board[y][x] == 1)
+            {
+                int pixelX = 10 + x * 30 + 15;  // x → pixelX
+                int pixelY = 10 + y * 30 + 15;  // y → pixelY
+                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
+            }
+            if(game->Player1Board[y][x] == 2)
             {
                 int pixelX = 10 + x * 30 + 15;
                 int pixelY = 10 + y * 30 + 15;
-
-                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
+                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLACK);
             }
         }
     }
-    return;
 }

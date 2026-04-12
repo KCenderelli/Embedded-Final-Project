@@ -20,9 +20,15 @@ void onePlayerPlaceShips(uint16_t x, uint16_t y){
     gridDisplay();
     rotationButtonDisplay();
 	placeShips(x, y);
-    buttonCheck(x,y);
+    buttonCheck(x, y);
     renderPlacementScreen();
+    renderPlacedShips();
     return;
+}
+
+void AIPlaceShips(void)
+{
+	return;
 }
 
 void onePlayerGameLogic(uint16_t x, uint16_t y){
