@@ -72,13 +72,10 @@ void LCD_Touch_Polling_Demo(void)
 {
 	LCD_Clear(LCD_COLOR_GREEN);
 	while (1) {
-		/* If touch pressed */
 		if (returnTouchStateAndLocation(&StaticTouchData) == STMPE811_State_Pressed) {
-			/* Touch valid */
 			printf("\nX: %03d\nY: %03d\n", StaticTouchData.x, StaticTouchData.y);
 			LCD_Clear(LCD_COLOR_RED);
 		} else {
-			/* Touch not pressed */
 			printf("Not Pressed\n\n");
 			LCD_Clear(LCD_COLOR_GREEN);
 		}

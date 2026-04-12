@@ -57,6 +57,13 @@ typedef struct {
     // 0 == empty
     // 1 == ship located
     // 2 == hit
+
+    int Player1Guesses[7][7];
+    int Player2Guesses[7][7];
+    // 0 == Empty/Not Guessed
+    // 1 == Miss
+    // 2 == Hit
+
     int currentPlayer;
     //0 = AI
     //1 = Player 1
@@ -79,5 +86,7 @@ void renderPlacementScreen(void);
 void renderPlacedShips(void);
 void drawShipPreview(void);
 void drawGuessPreview(void);
+void renderGuesses(void);
+void guessButtonDisplay(void);
 
 #endif /* INC_GAMEDISPLAY_H_ */

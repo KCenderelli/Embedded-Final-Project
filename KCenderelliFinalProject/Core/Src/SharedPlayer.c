@@ -95,6 +95,14 @@ uint8_t checkValidPlacement(int x, int y){
     return 1;
 }
 
+uint8_t checkGuessValidPlacement(int x, int y){
+    if(x < 0 || y < 0) return 0;
+    if(x > 6 || y > 6) return 0;
+    if(game->currentPlayer == 1 && game->Player1Guesses[y][x] != 0) return 0;
+	if((game->currentPlayer == 0 || game->currentPlayer == 2) && game->Player2Guesses[y][x] != 0) return 0;
+    return 1;
+}
+
 void placeShips(uint16_t x, uint16_t y)
 {
     int gridX = -1;
@@ -109,7 +117,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridX = game->placement.previewX - 1;
                 if(checkValidPlacement(gridX, gridY) == 1)
                 {
-                    game->placement.previewX = gridX;  // move left
+                    game->placement.previewX = gridX;
                 }
             }
             else if(x > 168)
@@ -117,7 +125,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridX = game->placement.previewX + 1;
                 if(checkValidPlacement(gridX, gridY) == 1)
                 {
-                    game->placement.previewX = gridX;  // move right
+                    game->placement.previewX = gridX;
                 }
             }
         }
@@ -129,7 +137,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridY = game->placement.previewY + 1;
 				if(checkValidPlacement(gridX, gridY) == 1)
 				{
-					game->placement.previewY = gridY;  // move down
+					game->placement.previewY = gridY;
 				}
             }
             else if(y >= 190)
@@ -137,7 +145,7 @@ void placeShips(uint16_t x, uint16_t y)
                 gridY = game->placement.previewY - 1;
 				if(checkValidPlacement(gridX, gridY) == 1)
 				{
-					game->placement.previewY = gridY;  // move up
+					game->placement.previewY = gridY;
 				}
             }
 		}
@@ -188,9 +196,9 @@ void buttonCheck(uint16_t x, uint16_t y){
 					for(int i = 0; i < game->player1Ships[game->placement.currentShipIndex].length; i++)
 					{
 					    if(game->placement.currentOrientation == HORIZONTAL)
-					        game->Player1Board[gridY][gridX + i] = 1;  // i is the offset, gridX unchanged
+					        game->Player1Board[gridY][gridX + i] = 1;
 					    else
-					        game->Player1Board[gridY + i][gridX] = 1;  // i is the offset, gridY unchanged
+					        game->Player1Board[gridY + i][gridX] = 1;
 					}
 					if(game->placement.currentShipIndex < 2)
 					{
@@ -217,6 +225,49 @@ void buttonCheck(uint16_t x, uint16_t y){
 			}
 		}
 	}
+}
+
+
+void guessButtonCheck(uint16_t x, uint16_t y){
+    if(y >= 0 && y <= 60)
+    {
+        if(x > 100 && x <= 200)
+        {
+            int gridX = game->guess.previewX;
+            int gridY = game->guess.previewY;
+
+            if(checkGuessValidPlacement(gridX, gridY) == 1)
+            {
+                if(game->currentPlayer == 1)
+                {
+                    if(game->Player2Board[gridY][gridX] == 1)
+                    {
+                        game->Player2Board[gridY][gridX] = 2;
+                        game->Player1Guesses[gridY][gridX] = 2;
+                    }
+                    else
+                    {
+                        game->Player1Guesses[gridY][gridX] = 1;
+                    }
+                }
+                else if(game->currentPlayer == 2)
+                {
+                    if(game->Player1Board[gridY][gridX] == 1)
+                    {
+                        game->Player1Board[gridY][gridX] = 2;
+                        game->Player2Guesses[gridY][gridX] = 2;
+                    }
+                    else
+                    {
+                        game->Player2Guesses[gridY][gridX] = 1;
+                    }
+                }
+
+                game->guess.previewX = 0;
+                game->guess.previewY = 0;
+            }
+        }
+    }
 }
 
 

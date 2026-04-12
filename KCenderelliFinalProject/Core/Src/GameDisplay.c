@@ -82,6 +82,8 @@ void gridDisplay(void){
 
 
 void rotationButtonDisplay(void){
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font12x12);
 	LCD_Draw_Square_Fill(70,270,40,40,LCD_COLOR_LIGHTBLUE);
 	LCD_DisplayChar(35,270,'R');
 	LCD_DisplayChar(45,270,'O');
@@ -96,6 +98,21 @@ void rotationButtonDisplay(void){
 	LCD_DisplayChar(165,270,'A');
 	LCD_DisplayChar(175,270,'C');
 	LCD_DisplayChar(185,270,'E');
+	return;
+}
+
+void guessButtonDisplay(void){
+	LCD_Draw_Square_Fill(125,260,25,90,LCD_COLOR_LIGHTBLUE);
+
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
+
+	LCD_DisplayChar(80,250,'G');
+	LCD_DisplayChar(105,250,'U');
+	LCD_DisplayChar(125,250,'E');
+	LCD_DisplayChar(145,250,'S');
+	LCD_DisplayChar(165,250,'S');
+
 	return;
 }
 
@@ -128,7 +145,10 @@ void drawShipPreview(void)
 
 void drawGuessPreview(void)
 {
+	int pixelX = 10 + game->guess.previewX * 30 + 15;
+	int pixelY = 10 + game->guess.previewY * 30 + 15;
 
+	LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_DARKYELLOW);
 }
 
 
@@ -140,26 +160,6 @@ void renderPlacementScreen(void)
     return;
 }
 
-//void renderPlacedShips(void){
-//    for(int y = 0; y < 7; y++)
-//    {
-//        for(int x = 0; x < 7; x++)
-//        {
-//            if(game->Player1Board[y][x] == 1)
-//            {
-//                int pixelX = 10 + x * 30 + 15;  // x → pixelX
-//                int pixelY = 10 + y * 30 + 15;  // y → pixelY
-//                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
-//            }
-//            if(game->Player1Board[y][x] == 2)
-//            {
-//                int pixelX = 10 + x * 30 + 15;
-//                int pixelY = 10 + y * 30 + 15;
-//                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLACK);
-//            }
-//        }
-//    }
-//}
 void renderPlacedShips(void){
     for(int y = 0; y < 7; y++)
     {
@@ -170,6 +170,34 @@ void renderPlacedShips(void){
                 cellValue = game->Player1Board[y][x];
             else
                 cellValue = game->Player2Board[y][x];
+
+            if(cellValue == 1)
+            {
+                int pixelX = 10 + x * 30 + 15;
+                int pixelY = 10 + y * 30 + 15;
+                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
+            }
+            if(cellValue == 2)
+            {
+                int pixelX = 10 + x * 30 + 15;
+                int pixelY = 10 + y * 30 + 15;
+                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLACK);
+            }
+        }
+    }
+}
+
+
+void renderGuesses(void){
+    for(int y = 0; y < 7; y++)
+    {
+        for(int x = 0; x < 7; x++)
+        {
+            int cellValue;
+            if(game->currentPlayer == 1)
+                cellValue = game->Player1Guesses[y][x];
+            else
+                cellValue = game->Player2Guesses[y][x];
 
             if(cellValue == 1)
             {

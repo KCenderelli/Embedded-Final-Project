@@ -69,19 +69,65 @@ void AIPlaceShips(void)
 	game->placement.currentShipIndex = 0;
 	game->placement.previewX = 0;
 	game->placement.previewY = 0;
+	game->mode = ONE_PLAYER;
 }
 
 void onePlayerGuess(uint16_t x, uint16_t y){
-    clearScreen();
-    gridDisplay();
-    renderPlacedShips();
-    return;
+	int gridX = -1;
+	int gridY = -1;
+	if(y > 60)
+	{
+		if(y >= 140 && y <= 220)
+		{
+			gridY = game->guess.previewY;
+			if(x < 84)
+			{
+				gridX = game->guess.previewX - 1;
+				if(checkGuessValidPlacement(gridX, gridY) == 1)
+				{
+					game->guess.previewX = gridX;  // move left
+				}
+			}
+			else if(x > 168)
+			{
+				gridX = game->guess.previewX + 1;
+				if(checkGuessValidPlacement(gridX, gridY) == 1)
+				{
+					game->guess.previewX = gridX;  // move right
+				}
+			}
+		}
+		if(x >= 84 && x <= 168)
+		{
+			gridX = game->guess.previewX;
+			if(y < 190)
+			{
+				gridY = game->guess.previewY + 1;
+				if(checkGuessValidPlacement(gridX, gridY) == 1)
+				{
+					game->guess.previewY = gridY;  // move down
+				}
+			}
+			else if(y >= 190)
+			{
+				gridY = game->guess.previewY - 1;
+				if(checkGuessValidPlacement(gridX, gridY) == 1)
+				{
+					game->guess.previewY = gridY;  // move up
+				}
+			}
+		}
+	}
+	return;
 }
 
 void onePlayerGameLogic(uint16_t x, uint16_t y){
 	clearScreen();
 	gridDisplay();
-	renderPlacedShips();
+	guessButtonDisplay();
 	onePlayerGuess(x, y);
+	guessButtonCheck(x, y);
+	renderGuesses();
+	drawGuessPreview();
 	return;
 }

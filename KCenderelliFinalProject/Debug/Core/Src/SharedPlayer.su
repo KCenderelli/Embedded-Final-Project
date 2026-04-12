@@ -2,5 +2,7 @@
 ../Core/Src/SharedPlayer.c:37:6:StartScreenTouchLogic	16	static
 ../Core/Src/SharedPlayer.c:57:6:returnToStart	8	static
 ../Core/Src/SharedPlayer.c:63:9:checkValidPlacement	32	static
-../Core/Src/SharedPlayer.c:98:6:placeShips	24	static
-../Core/Src/SharedPlayer.c:148:6:buttonCheck	40	static
+../Core/Src/SharedPlayer.c:98:9:checkGuessValidPlacement	16	static
+../Core/Src/SharedPlayer.c:106:6:placeShips	24	static
+../Core/Src/SharedPlayer.c:156:6:buttonCheck	40	static
+../Core/Src/SharedPlayer.c:231:6:guessButtonCheck	24	static
