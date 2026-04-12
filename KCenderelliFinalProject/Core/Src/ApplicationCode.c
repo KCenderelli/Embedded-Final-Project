@@ -19,6 +19,7 @@ void LCDTouchScreenInterruptGPIOInit(void);
 #endif // TOUCH_INTERRUPT_ENABLED
 #endif // COMPILE_TOUCH_FUNCTIONS
 
+RNG_HandleTypeDef hrng;
 
 void ApplicationInit(void)
 {
@@ -39,6 +40,9 @@ void ApplicationInit(void)
 	#endif // TOUCH_INTERRUPT_ENABLED
 
 	#endif // COMPILE_TOUCH_FUNCTIONS
+	__HAL_RCC_RNG_CLK_ENABLE();
+	hrng.Instance = RNG;
+	HAL_RNG_Init(&hrng);
 }
 
 void processTouchIfPending(void)

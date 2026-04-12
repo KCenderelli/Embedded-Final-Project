@@ -1,6 +1,6 @@
-../Core/Src/GameDriver.c:14:6:setNewTouchFlag	2
-../Core/Src/GameDriver.c:24:9:checkFlag	1
-../Core/Src/GameDriver.c:28:7:resetFlag	1
-../Core/Src/GameDriver.c:33:10:getX	1
-../Core/Src/GameDriver.c:37:10:getY	1
-../Core/Src/GameDriver.c:41:6:TouchLogic	7
+../Core/Src/GameDriver.c:15:6:setNewTouchFlag	2
+../Core/Src/GameDriver.c:25:9:checkFlag	1
+../Core/Src/GameDriver.c:29:7:resetFlag	1
+../Core/Src/GameDriver.c:34:10:getX	1
+../Core/Src/GameDriver.c:38:10:getY	1
+../Core/Src/GameDriver.c:42:6:TouchLogic	7

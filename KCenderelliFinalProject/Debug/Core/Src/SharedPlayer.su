@@ -1,6 +1,6 @@
 ../Core/Src/SharedPlayer.c:14:13:initGame	24	static
-../Core/Src/SharedPlayer.c:34:6:StartScreenTouchLogic	16	static
-../Core/Src/SharedPlayer.c:54:6:returnToStart	8	static
-../Core/Src/SharedPlayer.c:80:9:checkValidPlacement	32	static
-../Core/Src/SharedPlayer.c:113:6:placeShips	24	static
-../Core/Src/SharedPlayer.c:163:6:buttonCheck	40	static
+../Core/Src/SharedPlayer.c:37:6:StartScreenTouchLogic	16	static
+../Core/Src/SharedPlayer.c:57:6:returnToStart	8	static
+../Core/Src/SharedPlayer.c:63:9:checkValidPlacement	32	static
+../Core/Src/SharedPlayer.c:98:6:placeShips	24	static
+../Core/Src/SharedPlayer.c:148:6:buttonCheck	40	static

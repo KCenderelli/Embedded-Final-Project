@@ -17,7 +17,7 @@
 
 static volatile uint8_t touchPending = 0;
 extern GameState * game;
-
+extern RNG_HandleTypeDef hrng;
 
 void ApplicationInit(void);
 void LCD_Visual_Demo(void);

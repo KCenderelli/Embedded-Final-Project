@@ -10,6 +10,7 @@ extern GameState * game;
 uint16_t x_stored;
 uint16_t y_stored;
 static uint8_t statusFlag = 0;
+extern RNG_HandleTypeDef hrng;
 
 void setNewTouchFlag(uint16_t x, uint16_t y){
 	if(statusFlag == 0)
@@ -46,11 +47,10 @@ void TouchLogic(uint16_t x, uint16_t y){
 	else if (game->mode == ONE_PLAYER_SETUP)
 	{
 		onePlayerPlaceShips(x, y);
-		return;
-	}
-	else if(game->mode == AI_SETUP)
-	{
-		AIPlaceShips();
+		if(game->mode == AI_SETUP)
+		{
+			AIPlaceShips();
+		}
 		return;
 	}
 	else if (game->mode == TWO_PLAYER_SETUP)

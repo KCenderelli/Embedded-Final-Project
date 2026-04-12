@@ -10,11 +10,6 @@
 
 
 void startScreenDisplay(void){
-//	for(uint16_t x = 0; x < (LCD_PIXEL_WIDTH_X/5)-1; x++){
-//			for(uint16_t y = 0; y < (LCD_PIXEL_HEIGHT_Y/5)-1; y++){
-//				LCD_Draw_Circle_Fill((5*x)+3,(5*y)+3,3,(LCD_COLOR_LIGHTERBLUE+(x*y)));
-//			}
-//		}
 	LCD_Clear(LCD_COLOR_LIGHTERBLUE);
 
 	LCD_SetTextColor(LCD_COLOR_WHITE);
@@ -31,10 +26,6 @@ void startScreenDisplay(void){
 	LCD_DisplayChar(130,10,'H');
 	LCD_DisplayChar(140,10,'I');
 	LCD_DisplayChar(150,10,'P');
-
-
-//	LCD_Draw_Circle_Fill(55,250,40,LCD_COLOR_LIGHTBLUE);
-//	LCD_Draw_Circle_Fill(185,250,40,LCD_COLOR_LIGHTBLUE);
 
 	LCD_Draw_Square_Fill(125,150,40,90,LCD_COLOR_LIGHTBLUE);
 	LCD_Draw_Square_Fill(125,250,40,90,LCD_COLOR_LIGHTBLUE);
@@ -135,6 +126,11 @@ void drawShipPreview(void)
     return;
 }
 
+void drawGuessPreview(void)
+{
+
+}
+
 
 void renderPlacementScreen(void)
 {
@@ -144,18 +140,44 @@ void renderPlacementScreen(void)
     return;
 }
 
+//void renderPlacedShips(void){
+//    for(int y = 0; y < 7; y++)
+//    {
+//        for(int x = 0; x < 7; x++)
+//        {
+//            if(game->Player1Board[y][x] == 1)
+//            {
+//                int pixelX = 10 + x * 30 + 15;  // x → pixelX
+//                int pixelY = 10 + y * 30 + 15;  // y → pixelY
+//                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
+//            }
+//            if(game->Player1Board[y][x] == 2)
+//            {
+//                int pixelX = 10 + x * 30 + 15;
+//                int pixelY = 10 + y * 30 + 15;
+//                LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLACK);
+//            }
+//        }
+//    }
+//}
 void renderPlacedShips(void){
     for(int y = 0; y < 7; y++)
     {
         for(int x = 0; x < 7; x++)
         {
-            if(game->Player1Board[y][x] == 1)
+            int cellValue;
+            if(game->currentPlayer == 1)
+                cellValue = game->Player1Board[y][x];
+            else
+                cellValue = game->Player2Board[y][x];
+
+            if(cellValue == 1)
             {
-                int pixelX = 10 + x * 30 + 15;  // x → pixelX
-                int pixelY = 10 + y * 30 + 15;  // y → pixelY
+                int pixelX = 10 + x * 30 + 15;
+                int pixelY = 10 + y * 30 + 15;
                 LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
             }
-            if(game->Player1Board[y][x] == 2)
+            if(cellValue == 2)
             {
                 int pixelX = 10 + x * 30 + 15;
                 int pixelY = 10 + y * 30 + 15;

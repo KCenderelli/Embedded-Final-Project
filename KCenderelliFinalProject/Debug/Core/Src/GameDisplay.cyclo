@@ -1,6 +1,7 @@
 ../Core/Src/GameDisplay.c:12:6:startScreenDisplay	1
-../Core/Src/GameDisplay.c:70:6:gridDisplay	1
-../Core/Src/GameDisplay.c:93:6:rotationButtonDisplay	1
-../Core/Src/GameDisplay.c:111:6:drawShipPreview	3
-../Core/Src/GameDisplay.c:139:6:renderPlacementScreen	1
-../Core/Src/GameDisplay.c:147:6:renderPlacedShips	5
+../Core/Src/GameDisplay.c:61:6:gridDisplay	1
+../Core/Src/GameDisplay.c:84:6:rotationButtonDisplay	1
+../Core/Src/GameDisplay.c:102:6:drawShipPreview	3
+../Core/Src/GameDisplay.c:129:6:drawGuessPreview	1
+../Core/Src/GameDisplay.c:135:6:renderPlacementScreen	1
+../Core/Src/GameDisplay.c:163:6:renderPlacedShips	6

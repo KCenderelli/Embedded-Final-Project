@@ -35,6 +35,13 @@ typedef struct {
     int previewY;
 } PlacementState;
 
+
+typedef struct {
+    int previewX;
+    int previewY;
+} GussState;
+
+
 typedef struct {
     int length;
     int x;
@@ -57,6 +64,7 @@ typedef struct {
     Ship player1Ships[3];
     Ship player2Ships[3];
     PlacementState placement;
+    GussState guess;
 } GameState;
 
 extern GameState * game;
@@ -70,5 +78,6 @@ void player2BoardDisplay(void);
 void renderPlacementScreen(void);
 void renderPlacedShips(void);
 void drawShipPreview(void);
+void drawGuessPreview(void);
 
 #endif /* INC_GAMEDISPLAY_H_ */

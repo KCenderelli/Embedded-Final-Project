@@ -28,6 +28,9 @@ GameState * initGame(void)
     game->placement.previewX = 0;
     game->placement.previewY = 0;
 
+    game->guess.previewX = 0;
+    game->guess.previewY = 0;
+
     return game;
 }
 
@@ -57,53 +60,35 @@ void returnToStart(void){
 	return;
 }
 
-
-//uint8_t checkValidPlacement(int x, int y){
-//    if(x < 0 || y < 0) return 0;
-//
-//    Ship * ship = &game->player1Ships[game->placement.currentShipIndex];
-//
-//    if(game->placement.currentOrientation == HORIZONTAL)
-//    {
-//        if(x + ship->length > 7) return 0;  // ship runs off right edge
-//        if(y > 6)                return 0;
-//    }
-//    else // VERTICAL
-//    {
-//        if(x > 6)                return 0;
-//        if(y + ship->length > 7) return 0;  // ship runs off bottom edge
-//    }
-//
-//    return 1;
-//}
-
 uint8_t checkValidPlacement(int x, int y){
     if(x < 0 || y < 0) return 0;
 
-    Ship * ship = &game->player1Ships[game->placement.currentShipIndex];
+    Ship * ship;
+    if(game->currentPlayer == 1)
+        ship = &game->player1Ships[game->placement.currentShipIndex];
+    else
+        ship = &game->player2Ships[game->placement.currentShipIndex];
 
     if(game->placement.currentOrientation == HORIZONTAL)
     {
         if(x + ship->length > 7) return 0;
         if(y > 6)                return 0;
-
-        // check each cell the ship would occupy
         for(int i = 0; i < ship->length; i++)
         {
             if(game->currentPlayer == 1 && game->Player1Board[y][x + i] != 0) return 0;
-            if(game->currentPlayer == 2 && game->Player2Board[y][x + i] != 0) return 0;
+            if((game->currentPlayer == 0 || game->currentPlayer == 2) &&
+                game->Player2Board[y][x + i] != 0) return 0;
         }
     }
-    else // VERTICAL
+    else
     {
         if(x > 6)                return 0;
         if(y + ship->length > 7) return 0;
-
-        // check each cell the ship would occupy
         for(int i = 0; i < ship->length; i++)
         {
             if(game->currentPlayer == 1 && game->Player1Board[y + i][x] != 0) return 0;
-            if(game->currentPlayer == 2 && game->Player2Board[y + i][x] != 0) return 0;
+            if((game->currentPlayer == 0 || game->currentPlayer == 2) &&
+                game->Player2Board[y + i][x] != 0) return 0;
         }
     }
 
