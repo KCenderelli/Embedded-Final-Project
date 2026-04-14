@@ -17,6 +17,5 @@ void onePlayerGameLogic(uint16_t x, uint16_t y);
 void onePlayerPlaceShips(uint16_t x, uint16_t y);
 void AIPlaceShips(void);
 void onePlayerGuess(uint16_t x, uint16_t y);
-void AIGuess(void);
 
 #endif /* INC_ONEPLAYER_H_ */

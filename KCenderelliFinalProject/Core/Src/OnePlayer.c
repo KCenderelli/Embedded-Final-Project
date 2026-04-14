@@ -23,6 +23,10 @@ void onePlayerPlaceShips(uint16_t x, uint16_t y){
     buttonCheck(x, y);
     renderPlacementScreen();
     renderPlacedShips();
+    if(game->placement.currentShipIndex == 2)
+    {
+    	game->mode = AI_SETUP;
+    }
     return;
 }
 
@@ -70,74 +74,6 @@ void AIPlaceShips(void)
 	nextButtonDisplay();
 }
 
-void AIGuess(void)
-{
-    game->currentPlayer = 0;
-    int gridX = -1;
-    int gridY = -1;
-    uint8_t guessSet = 0;
-
-    for(int y = 0; y < 7 && !guessSet; y++)
-    {
-        for(int x = 0; x < 7 && !guessSet; x++)
-        {
-            if(game->Player2Guesses[y][x] == 2)
-            {
-                int neighborsX[4] = {x,   x,   x-1, x+1};
-                int neighborsY[4] = {y-1, y+1, y,   y  };
-
-                for(int n = 0; n < 4; n++)
-                {
-                    int nx = neighborsX[n];
-                    int ny = neighborsY[n];
-                    if(checkGuessValidPlacement(nx, ny) == 1)
-                    {
-                        gridX = nx;
-                        gridY = ny;
-                        guessSet = 1;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    if(!guessSet)
-    {
-        while(!guessSet)
-        {
-            uint32_t rng1, rng2;
-            HAL_RNG_GenerateRandomNumber(&hrng, &rng1);
-            HAL_RNG_GenerateRandomNumber(&hrng, &rng2);
-
-            gridX = rng1 % 7;
-            gridY = rng2 % 7;
-
-            if(checkGuessValidPlacement(gridX, gridY) == 1)
-            {
-                guessSet = 1;
-            }
-        }
-    }
-
-    if(game->Player1Board[gridY][gridX] == 1)
-    {
-        game->Player1Board[gridY][gridX] = 2;
-        game->Player2Guesses[gridY][gridX] = 2;
-    }
-    else
-    {
-        game->Player2Guesses[gridY][gridX] = 1;
-    }
-
-    clearScreen();
-    gridDisplay();
-    renderGuesses();
-    nextButtonDisplay();
-
-    game->currentPlayer = 1;
-    renderPlacedShips();
-}
 
 
 void onePlayerGuess(uint16_t x, uint16_t y){
@@ -185,93 +121,38 @@ void onePlayerGuess(uint16_t x, uint16_t y){
 }
 
 void onePlayerGameLogic(uint16_t x, uint16_t y){
-	if(game->currentPlayer == 0)
-	{
-		if(game->mode == ONE_PLAYER)
-		{
-			AIGuess();
-		}
-		nextButtonCheck(x, y);
-	}
-	else if(game->currentPlayer == 1)
-	{
-		onePlayerGuess(x, y);
-		clearScreen();
-		gridDisplay();
-		guessButtonDisplay();
-		renderGuesses();
-		drawGuessPreview();
-		guessButtonCheck(x,y);
-	}
-
-    if(checkForWin() == 1)
+    if(game->currentPlayer == 0)
     {
-        player1WinDisplay();
-        return;
+        if(y >= 0 && y <= 60)
+        {
+            nextButtonCheck(x, y);
+        }
+        else
+        {
+            clearScreen();
+            gridDisplay();
+            nextButtonDisplay();
+            renderPlacedShips();
+            renderGuesses();
+        }
     }
-    if(checkForWin() == 2)
+    else if(game->currentPlayer == 1)
     {
-        AIWinDisplay();
-        return;
+        if(y >= 0 && y <= 60)
+        {
+            guessButtonCheck(x, y);
+        }
+        else
+        {
+            onePlayerGuess(x, y);
+            clearScreen();
+            gridDisplay();
+            guessButtonDisplay();
+            renderGuesses();
+            drawGuessPreview();
+        }
     }
 
-//    if(game->mode == ONE_PLAYER_AI_REVEAL)
-//    {
-//        nextButtonCheck(x, y);
-//
-//        if(game->mode == ONE_PLAYER)
-//        {
-//            // mode just changed, redraw player 1's guess screen
-//            clearScreen();
-//            gridDisplay();
-//            guessButtonDisplay();
-//            renderGuesses();
-//            drawGuessPreview();
-//        }
-//        else
-//        {
-//            // still in reveal, redraw reveal screen
-//            clearScreen();
-//            gridDisplay();
-//            nextButtonDisplay();
-//            renderPlacedShips();
-//            renderGuesses();
-//        }
-//        return;
-//    }
-//
-//    // player 1's turn
-//    clearScreen();
-//    gridDisplay();
-//    guessButtonDisplay();
-//
-//    onePlayerGuess(x, y);
-//    guessButtonCheck(x, y);
-//
-//    if(game->currentPlayer == 0)
-//    {
-//        AIGuess();
-//        game->mode = ONE_PLAYER_AI_REVEAL;
-//        clearScreen();
-//        gridDisplay();
-//        nextButtonDisplay();
-//        renderPlacedShips();
-//        renderGuesses();
-//        return;
-//    }
-//
-//    // still player 1's turn (hit), redraw guess screen
-//    renderGuesses();
-//    drawGuessPreview();
-//
-//    if(checkForWin() == 1)
-//    {
-//        player1WinDisplay();
-//        return;
-//    }
-//    if(checkForWin() == 2)
-//    {
-//        AIWinDisplay();
-//        return;
-//    }
+    if(checkForWin() == 1){ player1WinDisplay(); return; }
+    if(checkForWin() == 2){ AIWinDisplay(); return; }
 }

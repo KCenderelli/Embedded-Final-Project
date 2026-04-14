@@ -46,6 +46,7 @@ void ApplicationInit(void)
 	HAL_RNG_Init(&hrng);
 }
 
+
 void processTouchIfPending(void)
 {
     if(touchPending == 1)
@@ -77,7 +78,26 @@ void processTouchIfPending(void)
 
         HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
-        if(y == 0 || x == 0)  return;
+        if(y == 0 || x == 0) return;
+
+        static uint32_t lastTouchTime = 0;
+        uint32_t now = HAL_GetTick();
+        if(now - lastTouchTime < 300) return;
+        lastTouchTime = now;
+
+        static uint16_t lastX = 0;
+        static uint16_t lastY = 0;
+        int16_t dx = (int16_t)x - (int16_t)lastX;
+        int16_t dy = (int16_t)y - (int16_t)lastY;
+        if(dx < 0) dx = -dx;
+        if(dy < 0) dy = -dy;
+        if(dx < 10 && dy < 10)
+        {
+            lastTouchTime = now;
+            return;
+        }
+        lastX = x;
+        lastY = y;
 
         printf("\nX: %03d\nY: %03d\n", x, y);
         TouchLogic(x, y);

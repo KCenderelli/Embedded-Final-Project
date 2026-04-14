@@ -1,6 +1,5 @@
 ../Core/Src/OnePlayer.c:10:6:onePlayerStartUp	8	static
 ../Core/Src/OnePlayer.c:18:6:onePlayerPlaceShips	16	static
-../Core/Src/OnePlayer.c:31:6:AIPlaceShips	48	static
-../Core/Src/OnePlayer.c:73:6:AIGuess	80	static
-../Core/Src/OnePlayer.c:143:6:onePlayerGuess	24	static
-../Core/Src/OnePlayer.c:187:6:onePlayerGameLogic	16	static
+../Core/Src/OnePlayer.c:35:6:AIPlaceShips	48	static
+../Core/Src/OnePlayer.c:79:6:onePlayerGuess	24	static
+../Core/Src/OnePlayer.c:153:6:onePlayerGameLogic	16	static
