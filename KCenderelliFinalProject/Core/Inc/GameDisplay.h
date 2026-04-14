@@ -84,7 +84,7 @@ void rotationButtonDisplay(void);
 void player1BoardDisplay(void);
 void player2BoardDisplay(void);
 void renderPlacementScreen(void);
-void renderPlacedShips(void);
+void renderPlacedShips(int player);
 void drawShipPreview(void);
 void drawGuessPreview(void);
 void renderGuesses(void);

@@ -22,8 +22,8 @@ void onePlayerPlaceShips(uint16_t x, uint16_t y){
 	placeShips(x, y);
     buttonCheck(x, y);
     renderPlacementScreen();
-    renderPlacedShips();
-    if(game->placement.currentShipIndex == 2)
+    renderPlacedShips(1);
+    if(game->placement.currentShipIndex == 3)
     {
     	game->mode = AI_SETUP;
     }
@@ -132,7 +132,7 @@ void onePlayerGameLogic(uint16_t x, uint16_t y){
             clearScreen();
             gridDisplay();
             nextButtonDisplay();
-            renderPlacedShips();
+            renderPlacedShips(1);
             renderGuesses();
         }
     }

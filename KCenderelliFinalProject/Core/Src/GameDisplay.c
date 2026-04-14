@@ -237,14 +237,13 @@ void renderPlacementScreen(void)
     drawShipPreview();
     return;
 }
-
-void renderPlacedShips(void){
+void renderPlacedShips(int player){
     for(int y = 0; y < 7; y++)
     {
         for(int x = 0; x < 7; x++)
         {
             int cellValue;
-            if(game->currentPlayer == 1)
+            if(player == 1)
                 cellValue = game->Player1Board[y][x];
             else
                 cellValue = game->Player2Board[y][x];
@@ -255,7 +254,7 @@ void renderPlacedShips(void){
                 int pixelY = 10 + y * 30 + 15;
                 LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_BLUE);
             }
-            if(cellValue == 2) // HIT
+            if(cellValue == 2)
             {
                 int pixelX = 10 + x * 30 + 15;
                 int pixelY = 10 + y * 30 + 15;

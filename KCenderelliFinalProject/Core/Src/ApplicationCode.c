@@ -104,6 +104,7 @@ void processTouchIfPending(void)
     }
 }
 
+
 void LCD_Visual_Demo(void)
 {
 	visualDemo();

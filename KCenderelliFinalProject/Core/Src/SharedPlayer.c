@@ -250,65 +250,72 @@ extern RNG_HandleTypeDef hrng;
 void AIGuess(void)
 {
     game->currentPlayer = 0;
-    int gridX = -1;
-    int gridY = -1;
-    uint8_t guessSet = 0;
+    uint8_t hitAgain = 1;
 
-    for(int y = 0; y < 7 && !guessSet; y++)
+    while(hitAgain)
     {
-        for(int x = 0; x < 7 && !guessSet; x++)
+        int gridX = -1;
+        int gridY = -1;
+        uint8_t guessSet = 0;
+
+        for(int y = 0; y < 7 && !guessSet; y++)
         {
-            if(game->Player2Guesses[y][x] == 2)
+            for(int x = 0; x < 7 && !guessSet; x++)
             {
-                int neighborsX[4] = {x,   x,   x-1, x+1};
-                int neighborsY[4] = {y-1, y+1, y,   y  };
-                for(int n = 0; n < 4; n++)
+                if(game->Player2Guesses[y][x] == 2)
                 {
-                    int nx = neighborsX[n];
-                    int ny = neighborsY[n];
-                    if(checkGuessValidPlacement(nx, ny) == 1)
+                    int neighborsX[4] = {x,   x,   x-1, x+1};
+                    int neighborsY[4] = {y-1, y+1, y,   y  };
+                    for(int n = 0; n < 4; n++)
                     {
-                        gridX = nx;
-                        gridY = ny;
-                        guessSet = 1;
-                        break;
+                        int nx = neighborsX[n];
+                        int ny = neighborsY[n];
+                        if(checkGuessValidPlacement(nx, ny) == 1)
+                        {
+                            gridX = nx;
+                            gridY = ny;
+                            guessSet = 1;
+                            break;
+                        }
                     }
                 }
             }
         }
-    }
 
-    if(!guessSet)
-    {
-        while(!guessSet)
+        if(!guessSet)
         {
-            uint32_t rng1, rng2;
-            HAL_RNG_GenerateRandomNumber(&hrng, &rng1);
-            HAL_RNG_GenerateRandomNumber(&hrng, &rng2);
-            gridX = rng1 % 7;
-            gridY = rng2 % 7;
-            if(checkGuessValidPlacement(gridX, gridY) == 1)
-                guessSet = 1;
+            while(!guessSet)
+            {
+                uint32_t rng1, rng2;
+                HAL_RNG_GenerateRandomNumber(&hrng, &rng1);
+                HAL_RNG_GenerateRandomNumber(&hrng, &rng2);
+                gridX = rng1 % 7;
+                gridY = rng2 % 7;
+                if(checkGuessValidPlacement(gridX, gridY) == 1)
+                    guessSet = 1;
+            }
+        }
+
+        if(game->Player1Board[gridY][gridX] == 1)
+        {
+            game->Player1Board[gridY][gridX] = 2;
+            game->Player2Guesses[gridY][gridX] = 2;
+            hitAgain = 1;
+        }
+        else
+        {
+            game->Player2Guesses[gridY][gridX] = 1;
+            hitAgain = 0;
         }
     }
 
-    if(game->Player1Board[gridY][gridX] == 1)
-    {
-        game->Player1Board[gridY][gridX] = 2;
-        game->Player2Guesses[gridY][gridX] = 2;
-    }
-    else
-    {
-        game->Player2Guesses[gridY][gridX] = 1;
-    }
 
     clearScreen();
     gridDisplay();
     nextButtonDisplay();
-    renderPlacedShips();
+    renderPlacedShips(1);
     renderGuesses();
 }
-
 
 
 void guessButtonCheck(uint16_t x, uint16_t y){
