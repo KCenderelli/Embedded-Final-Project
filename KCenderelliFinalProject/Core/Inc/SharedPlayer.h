@@ -26,6 +26,7 @@ void buttonCheck(uint16_t x, uint16_t y);
 uint8_t checkGuessValidPlacement(int x, int y);
 void guessButtonCheck(uint16_t x, uint16_t y);
 void nextButtonCheck(uint16_t x, uint16_t y);
+uint8_t checkForWin(void);
 
 
 #endif /* INC_SHAREDPLAYER_H_ */

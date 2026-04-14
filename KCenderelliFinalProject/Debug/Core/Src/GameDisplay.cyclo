@@ -3,8 +3,10 @@
 ../Core/Src/GameDisplay.c:84:6:rotationButtonDisplay	1
 ../Core/Src/GameDisplay.c:104:6:guessButtonDisplay	1
 ../Core/Src/GameDisplay.c:119:6:nextButtonDisplay	1
-../Core/Src/GameDisplay.c:132:6:drawShipPreview	3
-../Core/Src/GameDisplay.c:159:6:drawGuessPreview	1
-../Core/Src/GameDisplay.c:168:6:renderPlacementScreen	1
-../Core/Src/GameDisplay.c:176:6:renderPlacedShips	6
-../Core/Src/GameDisplay.c:204:6:renderGuesses	6
+../Core/Src/GameDisplay.c:132:6:AIWinDisplay	1
+../Core/Src/GameDisplay.c:149:6:player1WinDisplay	1
+../Core/Src/GameDisplay.c:172:6:drawShipPreview	3
+../Core/Src/GameDisplay.c:199:6:drawGuessPreview	1
+../Core/Src/GameDisplay.c:208:6:renderPlacementScreen	1
+../Core/Src/GameDisplay.c:216:6:renderPlacedShips	6
+../Core/Src/GameDisplay.c:244:6:renderGuesses	6

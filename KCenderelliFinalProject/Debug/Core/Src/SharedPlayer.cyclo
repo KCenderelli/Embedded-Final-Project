@@ -5,5 +5,6 @@
 ../Core/Src/SharedPlayer.c:98:9:checkGuessValidPlacement	10
 ../Core/Src/SharedPlayer.c:106:6:placeShips	14
 ../Core/Src/SharedPlayer.c:156:6:buttonCheck	20
-../Core/Src/SharedPlayer.c:289:6:guessButtonCheck	5
-../Core/Src/SharedPlayer.c:316:6:nextButtonCheck	3
+../Core/Src/SharedPlayer.c:232:6:guessButtonCheck	5
+../Core/Src/SharedPlayer.c:259:6:nextButtonCheck	3
+../Core/Src/SharedPlayer.c:272:9:checkForWin	7

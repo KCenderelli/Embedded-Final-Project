@@ -199,5 +199,13 @@ void onePlayerGameLogic(uint16_t x, uint16_t y){
 
     renderGuesses();
     drawGuessPreview();
+    if(checkForWin() == 1)
+    {
+    	player1WinDisplay();
+    }
+    if(checkForWin() == 2)
+	{
+    	AIWinDisplay();
+	}
     return;
 }

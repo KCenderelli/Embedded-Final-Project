@@ -227,64 +227,7 @@ void buttonCheck(uint16_t x, uint16_t y){
 	}
 }
 
-//
-//void guessButtonCheck(uint16_t x, uint16_t y){
-//    if(y >= 0 && y <= 60)
-//    {
-//        if(x > 100 && x <= 200)
-//        {
-//            int gridX = game->guess.previewX;
-//            int gridY = game->guess.previewY;
-//
-//            if(checkGuessValidPlacement(gridX, gridY) == 1)
-//            {
-//                if(game->currentPlayer == 1)
-//                {
-//                    if(game->Player2Board[gridY][gridX] == 1)
-//                    {
-//                        game->Player2Board[gridY][gridX] = 2;
-//                        game->Player1Guesses[gridY][gridX] = 2;
-//                    }
-//                    else
-//                    {
-//                        game->Player1Guesses[gridY][gridX] = 1;
-//                    }
-//                }
-//                else if(game->currentPlayer == 2)
-//                {
-//                    if(game->Player1Board[gridY][gridX] == 1)
-//                    {
-//                        game->Player1Board[gridY][gridX] = 2;
-//                        game->Player2Guesses[gridY][gridX] = 2;
-//                    }
-//                    else
-//                    {
-//                        game->Player2Guesses[gridY][gridX] = 1;
-//                    }
-//                }
-//
-//                game->guess.previewX = 0;
-//                game->guess.previewY = 0;
-//            }
-//            if(game->currentPlayer == 1)
-//            {
-//                if(game->Player2Board[gridY][gridX] == 1)
-//                {
-//                    game->Player2Board[gridY][gridX] = 2;
-//                    game->Player1Guesses[gridY][gridX] = 2;
-//                }
-//                else
-//                {
-//                    game->Player1Guesses[gridY][gridX] = 1;
-//                    game->currentPlayer = 0;
-//                }
-//
-//                game->guess.previewX = 0;
-//                game->guess.previewY = 0;
-//            }
-//        }
-//    }
-//}
+
 
 void guessButtonCheck(uint16_t x, uint16_t y){
     if(y >= 0 && y <= 60)
@@ -324,4 +267,29 @@ void nextButtonCheck(uint16_t x, uint16_t y){
 			game->guess.previewY = 0;
         }
     }
+}
+
+uint8_t checkForWin(void){
+    uint8_t p1_hits = 0;
+    uint8_t p2_hits = 0;
+
+    for(int i = 0; i < 7; i++){
+        for(int j = 0; j < 7; j++){
+            if(game->Player1Board[i][j] == 2){
+                p1_hits++;
+            }
+            if(game->Player2Board[i][j] == 2){
+                p2_hits++;
+            }
+        }
+    }
+
+    if(p1_hits == 9){
+        return 2;
+    }
+    if(p2_hits == 9){
+        return 1;
+    }
+
+    return 0;
 }

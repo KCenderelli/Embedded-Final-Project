@@ -21,6 +21,7 @@ void LCDTouchScreenInterruptGPIOInit(void);
 
 RNG_HandleTypeDef hrng;
 
+
 void ApplicationInit(void)
 {
 	initialise_monitor_handles(); // Allows printf functionality
@@ -45,22 +46,61 @@ void ApplicationInit(void)
 	HAL_RNG_Init(&hrng);
 }
 
+//void processTouchIfPending(void)
+//{
+//    if(touchPending == 1)
+//    {
+//        HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+//        DetermineTouchPosition(&StaticTouchData);
+//        uint16_t x = StaticTouchData.x;
+//        uint16_t y = StaticTouchData.y;
+//        HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+//
+//        printf("\nX: %03d\nY: %03d\n", x, y);
+//        TouchLogic(x, y);
+//        touchPending = 0;
+//    }
+//}
 void processTouchIfPending(void)
 {
     if(touchPending == 1)
     {
+        touchPending = 0;
         HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
-        DetermineTouchPosition(&StaticTouchData);
-        uint16_t x = StaticTouchData.x;
-        uint16_t y = StaticTouchData.y;
+
+        // wait for FIFO to have data
+        uint8_t fifoSize = 0;
+        while(fifoSize == 0)
+        {
+            fifoSize = ReadRegisterFromTouchModule(STMPE811_FIFO_SIZE);
+        }
+
+        uint16_t x = 0;
+        uint16_t y = 0;
+
+        // read ALL samples, keep the last valid one (most recent)
+        for(int i = 0; i < fifoSize; i++)
+        {
+            DetermineTouchPosition(&StaticTouchData);
+            if(StaticTouchData.y != 0 && StaticTouchData.x < 230)
+            {
+                x = StaticTouchData.x;
+                y = StaticTouchData.y;
+            }
+        }
+
+        // reset FIFO after draining so no stale data remains
+        WriteDataToTouchModule(STMPE811_FIFO_STA, 0x01);
+        WriteDataToTouchModule(STMPE811_FIFO_STA, 0x00);
+
         HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+        if(y == 0 || x == 0)  return;
 
         printf("\nX: %03d\nY: %03d\n", x, y);
         TouchLogic(x, y);
-        touchPending = 0;
     }
 }
-
 
 void LCD_Visual_Demo(void)
 {
@@ -126,9 +166,14 @@ void EXTI15_10_IRQHandler()
 	WriteDataToTouchModule(STMPE811_INT_STA, clearIRQData);
 	
 	uint8_t ctrlReg = ReadRegisterFromTouchModule(STMPE811_TSC_CTRL);
-	if (ctrlReg & 0x80)
+//	if (ctrlReg & 0x80)
+//	{
+//		isTouchDetected = true;
+//	}
+	uint8_t fifoSize = ReadRegisterFromTouchModule(STMPE811_FIFO_SIZE);
+	if((ctrlReg & 0x80) && fifoSize > 0)
 	{
-		isTouchDetected = true;
+	    isTouchDetected = true;
 	}
 
 
@@ -136,17 +181,17 @@ void EXTI15_10_IRQHandler()
 	if(isTouchDetected) // Touch has been detected
 	{
 		touchPending = 1;
-		printf("\nPressed");
+//		printf("\nPressed");
 
 	}
 	else{
 		/* Touch not pressed */
-		printf("\nNot pressed \n");
+//		printf("\nNot pressed \n");
 	}
 
 	// Re-enable IRQs
     WriteDataToTouchModule(STMPE811_INT_EN, currentIRQEnables);
-	HAL_EXTI_ClearPending(&LCDTouchIRQ, EXTI_TRIGGER_RISING_FALLING);
+	HAL_EXTI_ClearPending(&LCDTouchIRQ, EXTI_TRIGGER_FALLING);
 
 	HAL_NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
 	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);

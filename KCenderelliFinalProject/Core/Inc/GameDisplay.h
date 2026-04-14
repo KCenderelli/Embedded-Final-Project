@@ -90,6 +90,8 @@ void drawGuessPreview(void);
 void renderGuesses(void);
 void guessButtonDisplay(void);
 void nextButtonDisplay(void);
+void player1WinDisplay(void);
+void AIWinDisplay(void);
 
 
 #endif /* INC_GAMEDISPLAY_H_ */
