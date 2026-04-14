@@ -209,7 +209,32 @@ void buttonCheck(uint16_t x, uint16_t y){
 					}
 					else
 					{
-						game->mode = AI_SETUP;
+						if(game->mode == ONE_PLAYER_SETUP)
+						{
+							game->mode = AI_SETUP;
+						}
+						else if(game->mode == TWO_PLAYER_SETUP && game->currentPlayer == 1)
+						{
+							game->currentPlayer = 2;
+							game->placement.currentShipIndex = 0;
+							game->placement.currentOrientation = HORIZONTAL;
+							game->placement.previewX = 0;
+							game->placement.previewY = 0;
+
+							clearScreen();
+							gridDisplay();
+							rotationButtonDisplay();
+							renderPlacementScreen();
+							renderPlacedShips(game->currentPlayer);
+						}
+						else if(game->mode == TWO_PLAYER_SETUP && game->currentPlayer == 2)
+						{
+							game->currentPlayer = 1;
+							game->mode = TWO_PLAYER;
+
+							clearScreen();
+							gridDisplay();
+						}
 					}
 				}
 				else if(game->currentPlayer == 2)

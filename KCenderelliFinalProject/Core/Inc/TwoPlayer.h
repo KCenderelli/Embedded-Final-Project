@@ -14,5 +14,7 @@ extern GameState * game;
 
 void twoPlayerStartUp(void);
 void twoPlayerGameLogic(uint16_t x, uint16_t y);
+void twoPlayerPlaceShips(int x,int y);
+void twoPlayerGuess(uint16_t x, uint16_t y);
 
 #endif /* INC_TWOPLAYER_H_ */

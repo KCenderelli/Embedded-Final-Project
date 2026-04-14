@@ -1,2 +1,4 @@
 ../Core/Src/TwoPlayer.c:11:6:twoPlayerStartUp	8	static
-../Core/Src/TwoPlayer.c:19:6:twoPlayerGameLogic	16	static
+../Core/Src/TwoPlayer.c:19:6:twoPlayerPlaceShips	16	static
+../Core/Src/TwoPlayer.c:33:6:twoPlayerGuess	24	static
+../Core/Src/TwoPlayer.c:77:6:twoPlayerGameLogic	16	static

@@ -198,10 +198,20 @@ void drawShipPreview(void)
 {
 	Ship previewShip;
 
-	previewShip.length = game->player1Ships[game->placement.currentShipIndex].length;
-	previewShip.x = game->placement.previewX;
-	previewShip.y = game->placement.previewY;
-	previewShip.orient = game->placement.currentOrientation;
+	if(game->currentPlayer == 1)
+	{
+		previewShip.length = game->player1Ships[game->placement.currentShipIndex].length;
+		previewShip.x = game->placement.previewX;
+		previewShip.y = game->placement.previewY;
+		previewShip.orient = game->placement.currentOrientation;
+	}
+	if(game->currentPlayer == 2)
+	{
+		previewShip.length = game->player2Ships[game->placement.currentShipIndex].length;
+		previewShip.x = game->placement.previewX;
+		previewShip.y = game->placement.previewY;
+		previewShip.orient = game->placement.currentOrientation;
+	}
 
     for(int i = 0; i < previewShip.length; i++)
     {

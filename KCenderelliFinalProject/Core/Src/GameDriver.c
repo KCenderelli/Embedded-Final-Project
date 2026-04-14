@@ -55,7 +55,7 @@ void TouchLogic(uint16_t x, uint16_t y){
 	}
 	else if (game->mode == TWO_PLAYER_SETUP)
 	{
-		onePlayerPlaceShips(x, y);
+		twoPlayerPlaceShips(x, y);
 		return;
 	}
 	else if(game->mode == ONE_PLAYER)
