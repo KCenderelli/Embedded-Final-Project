@@ -81,6 +81,31 @@ void gridDisplay(void){
 }
 
 
+void AIDoneDisplay(void){
+	LCD_Clear(LCD_COLOR_WHITE);
+
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
+
+	LCD_DisplayChar(60,60,'A');
+	LCD_DisplayChar(75,60,'I');
+
+	LCD_DisplayChar(40,100,'P');
+	LCD_DisplayChar(55,100,'L');
+	LCD_DisplayChar(70,100,'A');
+	LCD_DisplayChar(85,100,'C');
+	LCD_DisplayChar(100,100,'E');
+	LCD_DisplayChar(115,100,'D');
+
+	LCD_DisplayChar(40,140,'S');
+	LCD_DisplayChar(55,140,'H');
+	LCD_DisplayChar(70,140,'I');
+	LCD_DisplayChar(85,140,'P');
+	LCD_DisplayChar(100,140,'S');
+	return;
+}
+
+
 void rotationButtonDisplay(void){
 	LCD_SetTextColor(LCD_COLOR_BLACK);
 	LCD_SetFont(&Font12x12);

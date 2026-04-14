@@ -46,21 +46,6 @@ void ApplicationInit(void)
 	HAL_RNG_Init(&hrng);
 }
 
-//void processTouchIfPending(void)
-//{
-//    if(touchPending == 1)
-//    {
-//        HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
-//        DetermineTouchPosition(&StaticTouchData);
-//        uint16_t x = StaticTouchData.x;
-//        uint16_t y = StaticTouchData.y;
-//        HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-//
-//        printf("\nX: %03d\nY: %03d\n", x, y);
-//        TouchLogic(x, y);
-//        touchPending = 0;
-//    }
-//}
 void processTouchIfPending(void)
 {
     if(touchPending == 1)
@@ -68,7 +53,6 @@ void processTouchIfPending(void)
         touchPending = 0;
         HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
 
-        // wait for FIFO to have data
         uint8_t fifoSize = 0;
         while(fifoSize == 0)
         {
@@ -78,7 +62,6 @@ void processTouchIfPending(void)
         uint16_t x = 0;
         uint16_t y = 0;
 
-        // read ALL samples, keep the last valid one (most recent)
         for(int i = 0; i < fifoSize; i++)
         {
             DetermineTouchPosition(&StaticTouchData);
@@ -89,7 +72,6 @@ void processTouchIfPending(void)
             }
         }
 
-        // reset FIFO after draining so no stale data remains
         WriteDataToTouchModule(STMPE811_FIFO_STA, 0x01);
         WriteDataToTouchModule(STMPE811_FIFO_STA, 0x00);
 

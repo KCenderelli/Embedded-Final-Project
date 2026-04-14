@@ -103,6 +103,7 @@ uint8_t checkGuessValidPlacement(int x, int y){
     return 1;
 }
 
+
 void placeShips(uint16_t x, uint16_t y)
 {
     int gridX = -1;
@@ -229,6 +230,37 @@ void buttonCheck(uint16_t x, uint16_t y){
 
 
 
+void nextButtonCheck(uint16_t x, uint16_t y){
+    if(y >= 0 && y <= 60)
+    {
+		if(game->mode == ONE_PLAYER_AI_REVEAL)
+		{
+			game->mode = ONE_PLAYER;
+			game->currentPlayer = 1;
+			game->guess.previewX = 0;
+			game->guess.previewY = 0;
+			clearScreen();
+			gridDisplay();
+			guessButtonDisplay();
+			renderGuesses();
+			drawGuessPreview();
+        }
+		else if (game->mode == ONE_PLAYER)
+		{
+			game->currentPlayer = 1;
+			game->guess.previewX = 0;
+			game->guess.previewY = 0;
+			clearScreen();
+			gridDisplay();
+			guessButtonDisplay();
+			renderGuesses();
+			drawGuessPreview();
+		}
+    }
+}
+
+
+
 void guessButtonCheck(uint16_t x, uint16_t y){
     if(y >= 0 && y <= 60)
     {
@@ -243,31 +275,36 @@ void guessButtonCheck(uint16_t x, uint16_t y){
 				{
 					game->Player2Board[gridY][gridX] = 2;
 					game->Player1Guesses[gridY][gridX] = 2;
+					clearScreen();
+					gridDisplay();
+					guessButtonDisplay();
+					renderGuesses();
+					drawGuessPreview();
 				}
 				else
 				{
 					game->Player1Guesses[gridY][gridX] = 1;
 					game->currentPlayer = 0;
+					clearScreen();
+					gridDisplay();
+					nextButtonDisplay();
+					renderGuesses();
 				}
-				game->guess.previewX = 0;
-				game->guess.previewY = 0;
 			}
+		}
+		else
+		{
+			clearScreen();
+			gridDisplay();
+			guessButtonDisplay();
+			renderGuesses();
+			drawGuessPreview();
 		}
     }
 }
 
-void nextButtonCheck(uint16_t x, uint16_t y){
-    if(y >= 0 && y <= 60)
-    {
-		if(game->mode == ONE_PLAYER_AI_REVEAL)
-		{
-			game->mode = ONE_PLAYER;
-			game->currentPlayer = 1;
-			game->guess.previewX = 0;
-			game->guess.previewY = 0;
-        }
-    }
-}
+
+
 
 uint8_t checkForWin(void){
     uint8_t p1_hits = 0;

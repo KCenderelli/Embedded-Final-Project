@@ -92,6 +92,7 @@ void guessButtonDisplay(void);
 void nextButtonDisplay(void);
 void player1WinDisplay(void);
 void AIWinDisplay(void);
+void AIDoneDisplay(void);
 
 
 #endif /* INC_GAMEDISPLAY_H_ */
