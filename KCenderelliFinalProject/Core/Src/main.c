@@ -26,7 +26,7 @@ extern GameState * game;
 uint16_t x_main;
 uint16_t y_main;
 extern volatile uint8_t touchPending;
-
+extern volatile uint8_t resetRequested;
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -61,6 +61,14 @@ int main(void)
   while(1)
   {
       processTouchIfPending();
+
+      if(resetRequested)
+      {
+          resetRequested = 0;
+          game->mode = START_SCREEN;
+          initGame();
+          startScreenDisplay();
+      }
   }
 }
 /**

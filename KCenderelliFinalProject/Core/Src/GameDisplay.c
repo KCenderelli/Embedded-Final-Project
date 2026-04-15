@@ -249,7 +249,7 @@ void drawShipPreview(void)
         int pixelX = 10 + gridX * 30 + 15;
         int pixelY = 10 + gridY * 30 + 15;
 
-        LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_LIGHTBLUE);
+        LCD_Draw_Circle_Fill(pixelX, pixelY, 10, LCD_COLOR_GREEN);
     }
     return;
 }

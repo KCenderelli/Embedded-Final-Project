@@ -21,8 +21,8 @@ void onePlayerPlaceShips(uint16_t x, uint16_t y){
     rotationButtonDisplay();
 	placeShips(x, y);
     buttonCheck(x, y);
-    renderPlacementScreen();
     renderPlacedShips(1);
+    renderPlacementScreen();
     if(game->placement.currentShipIndex == 3)
     {
     	game->mode = AI_SETUP;

@@ -13,6 +13,15 @@ GameState * game = &gameInstance;
 
 GameState * initGame(void)
 {
+	for(int y = 0; y < 7; y++)
+	{
+	    for(int x = 0; x < 7; x++)
+	    {
+	        game->Player1Board[y][x] = 0;
+	        game->Player2Board[y][x] = 0;
+	    }
+	}
+
     game->mode = START_SCREEN;
     game->currentPlayer = 1;
 
@@ -116,18 +125,12 @@ void placeShips(uint16_t x, uint16_t y)
             if(x < 84)
             {
                 gridX = game->placement.previewX - 1;
-                if(checkValidPlacement(gridX, gridY) == 1)
-                {
-                    game->placement.previewX = gridX;
-                }
+                game->placement.previewX = gridX;
             }
             else if(x > 168)
             {
                 gridX = game->placement.previewX + 1;
-                if(checkValidPlacement(gridX, gridY) == 1)
-                {
-                    game->placement.previewX = gridX;
-                }
+                game->placement.previewX = gridX;
             }
         }
         if(x >= 84 && x <= 168)
@@ -136,18 +139,12 @@ void placeShips(uint16_t x, uint16_t y)
             if(y < 190)
             {
                 gridY = game->placement.previewY + 1;
-				if(checkValidPlacement(gridX, gridY) == 1)
-				{
-					game->placement.previewY = gridY;
-				}
+				game->placement.previewY = gridY;
             }
             else if(y >= 190)
             {
                 gridY = game->placement.previewY - 1;
-				if(checkValidPlacement(gridX, gridY) == 1)
-				{
-					game->placement.previewY = gridY;
-				}
+				game->placement.previewY = gridY;
             }
 		}
     }

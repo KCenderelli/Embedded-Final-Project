@@ -19,6 +19,11 @@ static volatile uint8_t touchPending = 0;
 extern GameState * game;
 extern RNG_HandleTypeDef hrng;
 
+#define SHORT_MIN_MS   1000u
+
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
+
 void ApplicationInit(void);
 void LCD_Visual_Demo(void);
 void processTouchIfPending(void);

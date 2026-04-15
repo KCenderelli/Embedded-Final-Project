@@ -20,10 +20,29 @@ void LCDTouchScreenInterruptGPIOInit(void);
 #endif // COMPILE_TOUCH_FUNCTIONS
 
 RNG_HandleTypeDef hrng;
+TIM_HandleTypeDef Timer7_handle;
+GPIO_InitTypeDef Button;
 
+volatile uint8_t resetRequested = 0;
+
+static uint32_t buttonPressStart = 0;
+static uint8_t buttonActive = 0;
 
 void ApplicationInit(void)
 {
+	__HAL_RCC_TIM7_CLK_ENABLE();
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+
+	GPIO_InitTypeDef ButtonConfig = {0};
+	ButtonConfig.Pin = GPIO_PIN_0;
+	ButtonConfig.Mode = GPIO_MODE_IT_RISING_FALLING;
+	ButtonConfig.Pull = GPIO_PULLDOWN;
+	ButtonConfig.Speed = GPIO_SPEED_FREQ_HIGH;
+	HAL_GPIO_Init(GPIOA, &ButtonConfig);
+
+	HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
 	initialise_monitor_handles(); // Allows printf functionality
     LTCD__Init();
     LTCD_Layer_Init(0);
@@ -109,6 +128,42 @@ void LCD_Visual_Demo(void)
 {
 	visualDemo();
 }
+
+
+void EXTI0_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+}
+
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	printf("EXTI triggered\n");
+    if(GPIO_Pin != GPIO_PIN_0)
+        return;
+    uint8_t pressed = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+
+    if(pressed == 0)  // <-- pressed (ACTIVE LOW)
+    {
+        buttonPressStart = HAL_GetTick();
+        buttonActive = 1;
+    }
+    else  // released
+    {
+        if(buttonActive)
+        {
+            uint32_t elapsed = HAL_GetTick() - buttonPressStart;
+
+            if(elapsed >= 1000)
+            {
+            	resetRequested = 1;
+            }
+        }
+
+        buttonActive = 0;
+    }
+}
+
 
 #if COMPILE_TOUCH_FUNCTIONS == 1
 void LCD_Touch_Polling_Demo(void)
