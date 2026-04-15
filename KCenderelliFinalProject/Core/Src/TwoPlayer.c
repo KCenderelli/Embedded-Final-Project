@@ -75,38 +75,20 @@ void twoPlayerGuess(uint16_t x, uint16_t y){
 }
 
 void twoPlayerGameLogic(uint16_t x, uint16_t y){
-    if(game->currentPlayer == 0)
+    if(y >= 0 && y <= 60)
     {
-        if(y >= 0 && y <= 60)
-        {
-            nextButtonCheck(x, y);
-        }
-        else
-        {
-            clearScreen();
-            gridDisplay();
-            nextButtonDisplay();
-            renderPlacedShips(1);
-            renderGuesses();
-        }
+        guessButtonCheck(x, y);
     }
-    else if(game->currentPlayer == 1)
+    else
     {
-        if(y >= 0 && y <= 60)
-        {
-            guessButtonCheck(x, y);
-        }
-        else
-        {
-            twoPlayerGuess(x, y);
-            clearScreen();
-            gridDisplay();
-            guessButtonDisplay();
-            renderGuesses();
-            drawGuessPreview();
-        }
+    	twoPlayerGuess(x, y);
+        clearScreen();
+        gridDisplay();
+        guessButtonDisplay();
+        renderGuesses();
+        drawGuessPreview();
     }
 
     if(checkForWin() == 1){ player1WinDisplay(); return; }
-    if(checkForWin() == 2){ AIWinDisplay(); return; }
+    if(checkForWin() == 2){ player2WinDisplay(); return; }
 }

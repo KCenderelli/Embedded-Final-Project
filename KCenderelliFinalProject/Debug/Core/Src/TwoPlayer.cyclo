@@ -1,4 +1,4 @@
 ../Core/Src/TwoPlayer.c:11:6:twoPlayerStartUp	1
 ../Core/Src/TwoPlayer.c:19:6:twoPlayerPlaceShips	1
 ../Core/Src/TwoPlayer.c:33:6:twoPlayerGuess	14
-../Core/Src/TwoPlayer.c:77:6:twoPlayerGameLogic	7
+../Core/Src/TwoPlayer.c:115:6:twoPlayerGameLogic	4

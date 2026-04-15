@@ -91,6 +91,7 @@ void renderGuesses(void);
 void guessButtonDisplay(void);
 void nextButtonDisplay(void);
 void player1WinDisplay(void);
+void player2WinDisplay(void);
 void AIWinDisplay(void);
 void AIDoneDisplay(void);
 

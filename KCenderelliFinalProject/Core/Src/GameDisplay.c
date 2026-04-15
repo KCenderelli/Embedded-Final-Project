@@ -194,6 +194,29 @@ void player1WinDisplay(void){
     return;
 }
 
+void player2WinDisplay(void){
+    LCD_Clear(LCD_COLOR_WHITE);
+
+    LCD_SetTextColor(LCD_COLOR_BLACK);
+    LCD_SetFont(&Font16x24);
+
+    LCD_DisplayChar(40,140,'P');
+    LCD_DisplayChar(55,140,'L');
+    LCD_DisplayChar(70,140,'A');
+    LCD_DisplayChar(85,140,'Y');
+    LCD_DisplayChar(100,140,'E');
+    LCD_DisplayChar(115,140,'R');
+
+    LCD_DisplayChar(145,140,'2');
+
+    LCD_DisplayChar(40,180,'W');
+    LCD_DisplayChar(55,180,'I');
+    LCD_DisplayChar(70,180,'N');
+    LCD_DisplayChar(85,180,'S');
+
+    return;
+}
+
 void drawShipPreview(void)
 {
 	Ship previewShip;
