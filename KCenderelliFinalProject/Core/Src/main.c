@@ -19,6 +19,9 @@
 #include "main.h"
 #include "ApplicationCode.h"
 #include "GameDriver.h"
+#include <stdio.h>
+
+extern void initialise_monitor_handles(void);
 
 static void SystemClock_Config(void);
 
@@ -36,6 +39,7 @@ extern volatile uint8_t resetRequested;
   */
 int main(void)
 {
+	initialise_monitor_handles();
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec, each time incrementing uWtick. YOU CANNOT USE SYSTICK in interrupts. (No delay() and you cant wait and compare getTick(). Uou can access getTick(), but it wont increment inside a irq handler.
