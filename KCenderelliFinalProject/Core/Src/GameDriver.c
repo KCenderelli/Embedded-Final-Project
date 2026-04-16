@@ -68,6 +68,16 @@ void TouchLogic(uint16_t x, uint16_t y){
 	    onePlayerGameLogic(x, y);
 	    return;
 	}
+	else if(game->mode == TWO_PLAYER_P1_TURN)
+	{
+		twoPlayerGameLogic(x, y);
+		return;
+	}
+	else if(game->mode == TWO_PLAYER_P2_TURN)
+	{
+		twoPlayerGameLogic(x, y);
+		return;
+	}
 	else if(game->mode == TWO_PLAYER)
 	{
 		twoPlayerGameLogic(x, y);

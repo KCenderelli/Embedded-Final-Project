@@ -106,6 +106,53 @@ void AIDoneDisplay(void){
 }
 
 
+void Player1TurnDisplay(void){
+	LCD_Clear(LCD_COLOR_WHITE);
+
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
+
+
+	LCD_DisplayChar(40,100,'P');
+	LCD_DisplayChar(55,100,'L');
+	LCD_DisplayChar(70,100,'A');
+	LCD_DisplayChar(85,100,'Y');
+	LCD_DisplayChar(100,100,'E');
+	LCD_DisplayChar(115,100,'R');
+
+	LCD_DisplayChar(145,100,'1');
+
+	LCD_DisplayChar(40,140,'T');
+	LCD_DisplayChar(55,140,'U');
+	LCD_DisplayChar(70,140,'R');
+	LCD_DisplayChar(85,140,'N');
+	return;
+}
+
+void Player2TurnDisplay(void){
+	LCD_Clear(LCD_COLOR_WHITE);
+
+	LCD_SetTextColor(LCD_COLOR_BLACK);
+	LCD_SetFont(&Font16x24);
+
+
+	LCD_DisplayChar(40,100,'P');
+	LCD_DisplayChar(55,100,'L');
+	LCD_DisplayChar(70,100,'A');
+	LCD_DisplayChar(85,100,'Y');
+	LCD_DisplayChar(100,100,'E');
+	LCD_DisplayChar(115,100,'R');
+
+	LCD_DisplayChar(145,100,'2');
+
+	LCD_DisplayChar(40,140,'T');
+	LCD_DisplayChar(55,140,'U');
+	LCD_DisplayChar(70,140,'R');
+	LCD_DisplayChar(85,140,'N');
+	return;
+}
+
+
 void rotationButtonDisplay(void){
 	LCD_SetTextColor(LCD_COLOR_BLACK);
 	LCD_SetFont(&Font12x12);

@@ -25,6 +25,12 @@ void twoPlayerPlaceShips(int x,int y)
 	buttonCheck(x, y);
 	renderPlacementScreen();
 	renderPlacedShips(game->currentPlayer);
+	if(game->mode == TWO_PLAYER_P1_TURN)
+	{
+		clearScreen();
+		Player1TurnDisplay();
+		nextButtonDisplay();
+	}
 	return;
 }
 
@@ -75,9 +81,17 @@ void twoPlayerGuess(uint16_t x, uint16_t y){
 }
 
 void twoPlayerGameLogic(uint16_t x, uint16_t y){
-    if(y >= 0 && y <= 60)
+    if(y >= 0 && y <= 60 && game->mode == TWO_PLAYER)
     {
         guessButtonCheck(x, y);
+    }
+    else if(y >= 0 && y <= 60 && game->mode == TWO_PLAYER_P1_TURN)
+    {
+    	nextButtonCheck(x, y);
+    }
+    else if(y >= 0 && y <= 60 && game->mode == TWO_PLAYER_P2_TURN)
+    {
+    	nextButtonCheck(x, y);
     }
     else
     {

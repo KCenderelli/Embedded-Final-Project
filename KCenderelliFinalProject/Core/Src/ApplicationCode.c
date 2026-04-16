@@ -150,11 +150,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
     else
     {
+    	int32_t elapsed = HAL_GetTick() - buttonPressStart;
         if(buttonActive)
         {
-            uint32_t elapsed = HAL_GetTick() - buttonPressStart;
-
-            if(elapsed >= 1000)
+            if(elapsed >= 100)
             {
             	resetRequested = 1;
             }

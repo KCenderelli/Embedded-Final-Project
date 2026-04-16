@@ -19,6 +19,8 @@ typedef enum {
 	TWO_PLAYER_SETUP,
     ONE_PLAYER,
 	ONE_PLAYER_AI_REVEAL,
+	TWO_PLAYER_P1_TURN,
+	TWO_PLAYER_P2_TURN,
 	TWO_PLAYER,
     MODE_GAME_OVER
 } GameMode;
@@ -94,6 +96,8 @@ void player1WinDisplay(void);
 void player2WinDisplay(void);
 void AIWinDisplay(void);
 void AIDoneDisplay(void);
+void Player1TurnDisplay(void);
+void Player2TurnDisplay(void);
 
 
 #endif /* INC_GAMEDISPLAY_H_ */

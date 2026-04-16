@@ -22,6 +22,15 @@ GameState * initGame(void)
 	    }
 	}
 
+	for(int y = 0; y < 7; y++)
+		{
+		    for(int x = 0; x < 7; x++)
+		    {
+		        game->Player1Guesses[y][x] = 0;
+		        game->Player2Guesses[y][x] = 0;
+		    }
+		}
+
     game->mode = START_SCREEN;
     game->currentPlayer = 1;
 
@@ -104,6 +113,32 @@ uint8_t checkValidPlacement(int x, int y){
     return 1;
 }
 
+
+
+
+uint8_t checkValidDisplay(int x, int y){
+    if(x < 0 || y < 0) return 0;
+
+    Ship * ship;
+    if(game->currentPlayer == 1)
+        ship = &game->player1Ships[game->placement.currentShipIndex];
+    else
+        ship = &game->player2Ships[game->placement.currentShipIndex];
+
+    if(game->placement.currentOrientation == HORIZONTAL)
+    {
+        if(x + ship->length > 7) return 0;
+        if(y > 6)                return 0;
+    }
+    else
+    {
+        if(x > 6)                return 0;
+        if(y + ship->length > 7) return 0;
+    }
+
+    return 1;
+}
+
 uint8_t checkGuessValidPlacement(int x, int y){
     if(x < 0 || y < 0) return 0;
     if(x > 6 || y > 6) return 0;
@@ -125,12 +160,18 @@ void placeShips(uint16_t x, uint16_t y)
             if(x < 84)
             {
                 gridX = game->placement.previewX - 1;
-                game->placement.previewX = gridX;
+                if(checkValidDisplay(gridX,gridY) == 1)
+                {
+                	game->placement.previewX = gridX;
+                }
             }
             else if(x > 168)
             {
                 gridX = game->placement.previewX + 1;
-                game->placement.previewX = gridX;
+                if(checkValidDisplay(gridX,gridY) == 1)
+                {
+                	game->placement.previewX = gridX;
+                }
             }
         }
         if(x >= 84 && x <= 168)
@@ -139,12 +180,18 @@ void placeShips(uint16_t x, uint16_t y)
             if(y < 190)
             {
                 gridY = game->placement.previewY + 1;
-				game->placement.previewY = gridY;
+                if(checkValidDisplay(gridX,gridY) == 1)
+                {
+                	game->placement.previewY = gridY;
+                }
             }
             else if(y >= 190)
             {
                 gridY = game->placement.previewY - 1;
-				game->placement.previewY = gridY;
+                if(checkValidDisplay(gridX,gridY) == 1)
+                {
+                	game->placement.previewY = gridY;
+                }
             }
 		}
     }
@@ -159,18 +206,10 @@ void buttonCheck(uint16_t x, uint16_t y){
 			if(game->placement.currentOrientation == VERTICAL)
 			{
 				game->placement.currentOrientation = HORIZONTAL;
-				if(checkValidPlacement(game->placement.previewX, game->placement.previewY) == 0)
-				{
-					game->placement.currentOrientation = VERTICAL;
-				}
 			}
 			else
 			{
 				game->placement.currentOrientation = VERTICAL;
-				if(checkValidPlacement(game->placement.previewX, game->placement.previewY) == 0)
-				{
-					game->placement.currentOrientation = HORIZONTAL;
-				}
 			}
 		}
 		else if(x > 100 && x<= 200)
@@ -230,14 +269,6 @@ void buttonCheck(uint16_t x, uint16_t y){
 							renderPlacementScreen();
 							renderPlacedShips(game->currentPlayer);
 						}
-						else if(game->mode == TWO_PLAYER_SETUP && game->currentPlayer == 2)
-						{
-							game->currentPlayer = 1;
-							game->mode = TWO_PLAYER;
-
-							clearScreen();
-							gridDisplay();
-						}
 					}
 				}
 				else if(game->currentPlayer == 2)
@@ -257,10 +288,12 @@ void buttonCheck(uint16_t x, uint16_t y){
 				    }
 				    else
 				    {
-				        game->currentPlayer = 1;
-				        game->mode = TWO_PLAYER;
-				        clearScreen();
-				        gridDisplay();
+				    	game->currentPlayer = 1;
+						game->mode = TWO_PLAYER_P1_TURN;
+
+						clearScreen();
+						Player1TurnDisplay();
+						nextButtonDisplay();
 				    }
 				}
 			}
@@ -287,6 +320,14 @@ void nextButtonCheck(uint16_t x, uint16_t y){
 		{
 			game->guess.previewX = 0;
 			game->guess.previewY = 0;
+			if(game->mode == TWO_PLAYER_P1_TURN)
+			{
+				game->mode = TWO_PLAYER;
+			}
+			else
+			{
+				game->mode = ONE_PLAYER;
+			}
 			clearScreen();
 			gridDisplay();
 			guessButtonDisplay();
@@ -297,6 +338,10 @@ void nextButtonCheck(uint16_t x, uint16_t y){
 		{
 			game->guess.previewX = 0;
 			game->guess.previewY = 0;
+			if(game->mode == TWO_PLAYER_P1_TURN)
+			{
+				game->mode = TWO_PLAYER;
+			}
 			clearScreen();
 			gridDisplay();
 			guessButtonDisplay();
@@ -414,11 +459,10 @@ void guessButtonCheck(uint16_t x, uint16_t y){
                     else if(game->mode == TWO_PLAYER)
                     {
                         game->currentPlayer = 2;
+                        game->mode = TWO_PLAYER_P2_TURN;
                         clearScreen();
-                        gridDisplay();
-                        guessButtonDisplay();
-                        renderGuesses();
-                        drawGuessPreview();
+                        Player2TurnDisplay();
+                        nextButtonDisplay();
                     }
                 }
             }
@@ -442,11 +486,10 @@ void guessButtonCheck(uint16_t x, uint16_t y){
                     game->guess.previewX = 0;
                     game->guess.previewY = 0;
                     game->currentPlayer = 1;
+                    game->mode = TWO_PLAYER_P1_TURN;
                     clearScreen();
-                    gridDisplay();
-                    guessButtonDisplay();
-                    renderGuesses();
-                    drawGuessPreview();
+                    Player1TurnDisplay();
+                    nextButtonDisplay();
                 }
             }
         }
