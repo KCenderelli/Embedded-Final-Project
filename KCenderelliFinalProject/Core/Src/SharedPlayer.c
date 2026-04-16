@@ -283,6 +283,26 @@ void nextButtonCheck(uint16_t x, uint16_t y){
 			renderGuesses();
 			drawGuessPreview();
         }
+		if(game->currentPlayer == 1)
+		{
+			game->guess.previewX = 0;
+			game->guess.previewY = 0;
+			clearScreen();
+			gridDisplay();
+			guessButtonDisplay();
+			renderGuesses();
+			drawGuessPreview();
+		}
+		if(game->currentPlayer == 2)
+		{
+			game->guess.previewX = 0;
+			game->guess.previewY = 0;
+			clearScreen();
+			gridDisplay();
+			guessButtonDisplay();
+			renderGuesses();
+			drawGuessPreview();
+		}
     }
 }
 extern RNG_HandleTypeDef hrng;

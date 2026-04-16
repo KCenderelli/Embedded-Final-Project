@@ -143,12 +143,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         return;
     uint8_t pressed = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
 
-    if(pressed == 0)  // <-- pressed (ACTIVE LOW)
+    if(pressed == 0)
     {
         buttonPressStart = HAL_GetTick();
         buttonActive = 1;
     }
-    else  // released
+    else
     {
         if(buttonActive)
         {

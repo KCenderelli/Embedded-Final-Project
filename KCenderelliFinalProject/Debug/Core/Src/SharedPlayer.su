@@ -6,6 +6,6 @@
 ../Core/Src/SharedPlayer.c:116:6:placeShips	24	static
 ../Core/Src/SharedPlayer.c:154:6:buttonCheck	40	static
 ../Core/Src/SharedPlayer.c:272:6:nextButtonCheck	16	static
-../Core/Src/SharedPlayer.c:290:6:AIGuess	88	static
-../Core/Src/SharedPlayer.c:361:6:guessButtonCheck	24	static
-../Core/Src/SharedPlayer.c:436:9:checkForWin	24	static
+../Core/Src/SharedPlayer.c:310:6:AIGuess	88	static
+../Core/Src/SharedPlayer.c:381:6:guessButtonCheck	24	static
+../Core/Src/SharedPlayer.c:456:9:checkForWin	24	static
