@@ -5,8 +5,8 @@
 ../Core/Src/SharedPlayer.c:119:9:checkValidDisplay	24	static
 ../Core/Src/SharedPlayer.c:142:9:checkGuessValidPlacement	16	static
 ../Core/Src/SharedPlayer.c:151:6:placeShips	24	static
-../Core/Src/SharedPlayer.c:201:6:buttonCheck	40	static
-../Core/Src/SharedPlayer.c:305:6:nextButtonCheck	16	static
-../Core/Src/SharedPlayer.c:355:6:AIGuess	88	static
-../Core/Src/SharedPlayer.c:426:6:guessButtonCheck	24	static
-../Core/Src/SharedPlayer.c:499:9:checkForWin	24	static
+../Core/Src/SharedPlayer.c:201:6:buttonCheck	48	static
+../Core/Src/SharedPlayer.c:324:6:nextButtonCheck	16	static
+../Core/Src/SharedPlayer.c:365:6:AIGuess	88	static
+../Core/Src/SharedPlayer.c:437:6:guessButtonCheck	24	static
+../Core/Src/SharedPlayer.c:510:9:checkForWin	24	static

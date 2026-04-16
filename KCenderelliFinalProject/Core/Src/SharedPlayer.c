@@ -201,15 +201,33 @@ void placeShips(uint16_t x, uint16_t y)
 void buttonCheck(uint16_t x, uint16_t y){
 	if(y >= 0 && y <= 60)
 	{
+		int gridX = game->placement.previewX;
+		int gridY = game->placement.previewY;
 		if(x >= 30 && x<= 100)
 		{
 			if(game->placement.currentOrientation == VERTICAL)
 			{
 				game->placement.currentOrientation = HORIZONTAL;
+				if(checkValidDisplay(gridX, gridY) == 1)
+				{
+					game->placement.currentOrientation = HORIZONTAL;
+				}
+				else
+				{
+					game->placement.currentOrientation = VERTICAL;
+				}
 			}
 			else
 			{
 				game->placement.currentOrientation = VERTICAL;
+				if(checkValidDisplay(gridX, gridY) == 1)
+				{
+					game->placement.currentOrientation = VERTICAL;
+				}
+				else
+				{
+					game->placement.currentOrientation = HORIZONTAL;
+				}
 			}
 		}
 		else if(x > 100 && x<= 200)
@@ -253,6 +271,7 @@ void buttonCheck(uint16_t x, uint16_t y){
 					{
 						if(game->mode == ONE_PLAYER_SETUP)
 						{
+							game->currentPlayer = 0;
 							game->mode = AI_SETUP;
 						}
 						else if(game->mode == TWO_PLAYER_SETUP && game->currentPlayer == 1)
@@ -305,43 +324,32 @@ void buttonCheck(uint16_t x, uint16_t y){
 void nextButtonCheck(uint16_t x, uint16_t y){
     if(y >= 0 && y <= 60)
     {
-		if(game->currentPlayer == 0)
+    	game->guess.previewX = 0;
+    	game->guess.previewY = 0;
+		if(game->mode == ONE_PLAYER_AI_REVEAL)
 		{
+			game->mode = ONE_PLAYER;
 			game->currentPlayer = 1;
-			game->guess.previewX = 0;
-			game->guess.previewY = 0;
 			clearScreen();
 			gridDisplay();
 			guessButtonDisplay();
 			renderGuesses();
 			drawGuessPreview();
         }
-		if(game->currentPlayer == 1)
+		else if(game->mode == TWO_PLAYER_P1_TURN)
 		{
-			game->guess.previewX = 0;
-			game->guess.previewY = 0;
-			if(game->mode == TWO_PLAYER_P1_TURN)
-			{
-				game->mode = TWO_PLAYER;
-			}
-			else
-			{
-				game->mode = ONE_PLAYER;
-			}
+			game->mode = TWO_PLAYER;
+			game->currentPlayer = 1;
 			clearScreen();
 			gridDisplay();
 			guessButtonDisplay();
 			renderGuesses();
 			drawGuessPreview();
 		}
-		if(game->currentPlayer == 2)
+		else if(game->mode == TWO_PLAYER_P2_TURN)
 		{
-			game->guess.previewX = 0;
-			game->guess.previewY = 0;
-			if(game->mode == TWO_PLAYER_P1_TURN)
-			{
-				game->mode = TWO_PLAYER;
-			}
+			game->mode = TWO_PLAYER;
+			game->currentPlayer = 2;
 			clearScreen();
 			gridDisplay();
 			guessButtonDisplay();
@@ -350,6 +358,8 @@ void nextButtonCheck(uint16_t x, uint16_t y){
 		}
     }
 }
+
+
 extern RNG_HandleTypeDef hrng;
 
 void AIGuess(void)
@@ -415,6 +425,7 @@ void AIGuess(void)
     }
 
 
+    game->mode = ONE_PLAYER_AI_REVEAL;
     clearScreen();
     gridDisplay();
     nextButtonDisplay();

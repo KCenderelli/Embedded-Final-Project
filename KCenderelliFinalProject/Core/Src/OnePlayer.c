@@ -121,22 +121,14 @@ void onePlayerGuess(uint16_t x, uint16_t y){
 }
 
 void onePlayerGameLogic(uint16_t x, uint16_t y){
-    if(game->currentPlayer == 0)
+    if(game->mode == ONE_PLAYER_AI_REVEAL)
     {
         if(y >= 0 && y <= 60)
         {
             nextButtonCheck(x, y);
         }
-        else
-        {
-            clearScreen();
-            gridDisplay();
-            nextButtonDisplay();
-            renderPlacedShips(1);
-            renderGuesses();
-        }
     }
-    else if(game->currentPlayer == 1)
+    else if(game->mode == ONE_PLAYER)
     {
         if(y >= 0 && y <= 60)
         {
